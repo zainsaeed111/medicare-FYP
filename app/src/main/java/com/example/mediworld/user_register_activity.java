@@ -15,13 +15,13 @@ public class user_register_activity extends AppCompatActivity {
         setContentView(R.layout.activity_user_register);
         getSupportActionBar().hide();
         userrigisterbtn=findViewById(R.id.userregisterBtn);
-        userrigisterbtn.setOnClickListener(new View.OnClickListener() {
+      /*  userrigisterbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), dashboard_practice.class);
                 startActivity(intent);
             }
-        });
+        });*/
 
     }
 }

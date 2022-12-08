@@ -5,22 +5,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageView;
 
-public class user_login_activity extends AppCompatActivity {
-Button userloginbtn;
+public class selectuser extends AppCompatActivity {
+    ImageView iconbtnuser,iconbtnshop;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_login);
         getSupportActionBar().hide();
-        userloginbtn=findViewById(R.id.userloginBtn);
-        userloginbtn.setOnClickListener(new View.OnClickListener() {
+        setContentView(R.layout.activity_selectuser);
+        iconbtnuser=findViewById(R.id.iconbtn_user);
+        iconbtnshop=findViewById(R.id.icobtn_shop);
+        iconbtnuser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), custom_bottom_menu.class);
+                Intent intent = new Intent(getApplicationContext(), user_basic_activity.class);
                 startActivity(intent);
             }
         });
+
+
     }
 }

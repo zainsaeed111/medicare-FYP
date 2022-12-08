@@ -3,25 +3,41 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android Projects/FYP/MediWorld/app/src/main/res/drawable/about_bn.xml" value="0.1" />
+        <entry key="..\:/Android Projects/FYP/MediWorld/app/src/main/res/drawable/addicon.xml" value="0.1" />
         <entry key="..\:/Android Projects/FYP/MediWorld/app/src/main/res/drawable/backarrowicon_userbasic_activity.xml" value="0.10833333333333334" />
         <entry key="..\:/Android Projects/FYP/MediWorld/app/src/main/res/drawable/background_dash_box.xml" value="0.19739583333333333" />
         <entry key="..\:/Android Projects/FYP/MediWorld/app/src/main/res/drawable/box_order_icon.xml" value="0.19739583333333333" />
         <entry key="..\:/Android Projects/FYP/MediWorld/app/src/main/res/drawable/button_background_reg_login.xml" value="0.2140625" />
+        <entry key="..\:/Android Projects/FYP/MediWorld/app/src/main/res/drawable/button_transparent_back.xml" value="0.10833333333333334" />
         <entry key="..\:/Android Projects/FYP/MediWorld/app/src/main/res/drawable/custom_edittext.xml" value="0.2101851851851852" />
+        <entry key="..\:/Android Projects/FYP/MediWorld/app/src/main/res/drawable/custom_email_focus.xml" value="0.10833333333333334" />
+        <entry key="..\:/Android Projects/FYP/MediWorld/app/src/main/res/drawable/custom_password_focus.xml" value="0.1453125" />
+        <entry key="..\:/Android Projects/FYP/MediWorld/app/src/main/res/drawable/custombottommenu_home.xml" value="0.1" />
+        <entry key="..\:/Android Projects/FYP/MediWorld/app/src/main/res/drawable/dahsboard_layout_shadow_back.xml" value="0.1453125" />
         <entry key="..\:/Android Projects/FYP/MediWorld/app/src/main/res/drawable/swtich_btn.xml" value="0.2140625" />
         <entry key="..\:/Android Projects/FYP/MediWorld/app/src/main/res/drawable/swtich_btn_tricks.xml" value="0.2140625" />
+        <entry key="..\:/Android Projects/FYP/MediWorld/app/src/main/res/drawable/transparent_button_back.xml" value="0.10833333333333334" />
+        <entry key="..\:/Android Projects/FYP/MediWorld/app/src/main/res/drawable/userdashboard_card_back.xml" value="0.20925925925925926" />
+        <entry key="..\:/Android Projects/FYP/MediWorld/app/src/main/res/drawable/view_order_button_back_user_dashboard.xml" value="0.1453125" />
+        <entry key="..\:/Android Projects/FYP/MediWorld/app/src/main/res/layout/activity_custom_bottom_menu.xml" value="0.1" />
         <entry key="..\:/Android Projects/FYP/MediWorld/app/src/main/res/layout/activity_dashboard_prac.xml" value="0.25" />
-        <entry key="..\:/Android Projects/FYP/MediWorld/app/src/main/res/layout/activity_dashboard_practice.xml" value="0.1453804347826087" />
+        <entry key="..\:/Android Projects/FYP/MediWorld/app/src/main/res/layout/activity_dashboard_practice.xml" value="0.1" />
         <entry key="..\:/Android Projects/FYP/MediWorld/app/src/main/res/layout/activity_main.xml" value="0.15" />
+        <entry key="..\:/Android Projects/FYP/MediWorld/app/src/main/res/layout/activity_selectuser.xml" value="0.16" />
         <entry key="..\:/Android Projects/FYP/MediWorld/app/src/main/res/layout/activity_user_basic.xml" value="0.1" />
         <entry key="..\:/Android Projects/FYP/MediWorld/app/src/main/res/layout/activity_user_dashboard.xml" value="0.22" />
         <entry key="..\:/Android Projects/FYP/MediWorld/app/src/main/res/layout/activity_user_home_main.xml" value="0.12" />
         <entry key="..\:/Android Projects/FYP/MediWorld/app/src/main/res/layout/activity_user_login.xml" value="0.22" />
         <entry key="..\:/Android Projects/FYP/MediWorld/app/src/main/res/layout/activity_user_register.xml" value="0.1" />
         <entry key="..\:/Android Projects/FYP/MediWorld/app/src/main/res/layout/bottom_menu.xml" value="0.15806159420289856" />
+        <entry key="..\:/Android Projects/FYP/MediWorld/app/src/main/res/layout/fragment_about.xml" value="0.18070652173913043" />
+        <entry key="..\:/Android Projects/FYP/MediWorld/app/src/main/res/layout/fragment_chat.xml" value="0.18070652173913043" />
+        <entry key="..\:/Android Projects/FYP/MediWorld/app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="..\:/Android Projects/FYP/MediWorld/app/src/main/res/layout/fragment_user_home.xml" value="0.15806159420289856" />
         <entry key="..\:/Android Projects/FYP/MediWorld/app/src/main/res/menu/bottom_menu.xml" value="0.19791666666666666" />
         <entry key="..\:/Android Projects/FYP/MediWorld/app/src/main/res/menu/user_bottom_menu.xml" value="0.16770833333333332" />
+        <entry key="..\:/Android Projects/FYP/MediWorld/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
       </map>
     </option>
   </component>

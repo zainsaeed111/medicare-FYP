@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:id="@+id/mainuser_dash"
+    android:padding="0dp"
+    tools:context=".home">
+   <RelativeLayout
+      android:fitsSystemWindows="true"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:background="@drawable/dahsboard_layout_shadow_back"
+       android:outlineSpotShadowColor="@color/grey"
+       android:outlineAmbientShadowColor="@color/grey"
+       android:padding="15dp">
+
+
+       <ImageView
+           android:id="@+id/imgProfile"
+           android:layout_width="50dp"
+           android:layout_height="50dp"
+           android:layout_centerVertical="true"
+           android:src="@drawable/dashobard_profileicon">
+
+       </ImageView>
+
+       <ImageView
+           android:paddingTop="7dp"
+           android:paddingLeft="5dp"
+           android:id="@+id/imgInfo"
+           android:layout_width="40dp"
+           android:layout_height="40dp"
+           android:layout_alignParentRight="true"
+           android:src="@drawable/dashobard_infoiconii">
+
+       </ImageView>
+
+
+       <ImageView
+
+           android:id="@+id/img"
+           android:layout_width="40dp"
+           android:layout_height="40dp"
+           android:layout_marginLeft="20dp"
+           android:layout_toLeftOf="@+id/imgInfo"
+           android:layout_centerVertical="true"
+           android:src="@drawable/dashobard_ordersiconi">
+           </ImageView>
+
+   </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:orientation="vertical">
+
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="View Your Orders"
+                android:textColor="@color/grey"
+                android:textStyle="italic"
+                android:drawableEnd="@drawable/button_arrow_dashboard"
+                android:drawableStart="@drawable/view_order_button_icon"
+                android:textAlignment="textStart"
+                android:padding="10dp"
+                android:drawablePadding="20dp"
+                android:background="@drawable/button_transparent_back"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"></androidx.appcompat.widget.AppCompatButton>
+
+
+
+        <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="See Features"
+                    android:layout_marginTop="8dp"
+                    android:textSize="20sp"
+                    android:textColor="@color/primary_color"
+                    android:textStyle="bold"></TextView>
+
+
+
+    </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>
