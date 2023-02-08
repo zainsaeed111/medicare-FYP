@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "212877107746",
+    "project_id": "medi-world-cf6cb",
+    "storage_bucket": "medi-world-cf6cb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:212877107746:android:df0d1b1f807ddc45e9607b",
+        "android_client_info": {
+          "package_name": "com.example.mediworld"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "212877107746-e43n0vv3aapg87a7ib5a37vhb9vu5tom.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mediworld",
+            "certificate_hash": "7f8cf07d3c7b37724c8705dc645bba2401b0ab3c"
+          }
+        },
+        {
+          "client_id": "212877107746-f6ff3jt2jsbv86d0tqtcbl1padaru8be.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7fUdpJc8n_ykg-h2b1OgAWDvSfu0jQds"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "212877107746-f6ff3jt2jsbv86d0tqtcbl1padaru8be.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

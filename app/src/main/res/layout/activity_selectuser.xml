@@ -38,18 +38,33 @@
 
         <ImageView
             android:id="@+id/iconbtn_user"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
+            android:layout_width="@dimen/_85sdp"
+            android:layout_height="@dimen/_85sdp"
             android:layout_margin="5dp"
-            android:src="@drawable/user_selectactivity"></ImageView>
+            android:layout_marginRight="@dimen/_35sdp"
+            android:src="@drawable/continueas_user_icon"></ImageView>
+
+
+
+
+        <TextView
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="OR"
+            android:textColor="@color/white"
+            android:textSize="30sp" />
+
+
 
         <ImageView
-
             android:id="@+id/icobtn_shop"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
+            android:layout_width="@dimen/_85sdp"
+            android:layout_height="@dimen/_85sdp"
             android:layout_margin="5dp"
-            android:src="@drawable/user_shopselect_icon"></ImageView>
+            android:src="@drawable/continueas_shop_icon"></ImageView>
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 

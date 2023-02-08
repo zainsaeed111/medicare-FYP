@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@color/white"
+    android:focusableInTouchMode="true"
+    android:gravity="center"
+    tools:context=".shop_login">
+
+    <!-- <ScrollView
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_alignParentLeft="true"
+         android:layout_alignParentTop="true"
+         android:layout_centerInParent="true"
+         android:paddingTop="20dp">-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/viewParent.headerText.NoMode"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="Already have an \nAccount?\nLogin Here" />
+
+            <pl.droidsonroids.gif.GifImageView
+                android:layout_width="170dp"
+                android:layout_height="180dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/gig_login_shop" />
+        </RelativeLayout>
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etshopnameShopLog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:background="@drawable/custom_edittext"
+            android:drawableStart="@drawable/custom_shop_shopname_focus"
+            android:drawablePadding="@dimen/_10sdp"
+            android:elevation="3dp"
+            android:hint="Shop Name"
+            android:padding="12.5dp"
+            android:textColor="@color/grey"
+            android:textColorHint="@color/grey" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etpassShopLog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/custom_edittext"
+            android:drawableStart="@drawable/custom_password_focus"
+            android:drawablePadding="10dp"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:padding="12.5dp"
+            android:textColor="@color/grey"
+            android:textColorHint="@color/grey"
+            app:passwordToggleEnabled="true"></com.google.android.material.textfield.TextInputEditText>
+
+
+        <TextView
+
+            style="@style/viewParent"
+            android:layout_gravity="end"
+            android:text="Forgot Password?"
+            android:textColor="@color/primary_color"
+            android:textSize="@dimen/_13sdp" />
+        <!--  <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnregUsereg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="20dp"
+
+            android:background="@drawable/button_background_reg_login"
+            android:minHeight="48dp"
+            android:text="Register"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white" />
+-->
+
+
+        <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
+            android:id="@+id/userLoginBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/loginViewsMargin"
+            android:background="@drawable/button_background_reg_login"
+            android:gravity="center"
+            android:minHeight="48dp"
+            android:text="Login"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:initialCornerAngle="27dp"
+            app:spinning_bar_color="#FFF"
+            app:spinning_bar_padding="6dp"
+            app:spinning_bar_width="4dp"></br.com.simplepass.loading_button_lib.customViews.CircularProgressButton>
+
+        <TextView
+            style="@style/parent"
+            android:layout_marginTop="@dimen/loginViewsMargin"
+          android:id="@+id/newShoptv"
+            android:text="New user? Register Now"
+            android:textAlignment="center"
+            android:textColor="@color/primary_color"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:weightSum="12">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="3"
+                android:background="@color/primary_color" />
+
+            <TextView
+                android:id="@+id/tvRegisterUselog"
+                style="@style/viewParent.headerText.NoMode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                android:text="Use other Methods"
+                android:textAlignment="center"
+                android:textColor="@color/primary_color"
+                android:textSize="12sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="3"
+                android:background="@color/primary_color" />
+
+
+        </LinearLayout>
+
+        <!--<LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_facebook" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/ic_google_plus" />
+        </LinearLayout>
+-->
+        <!-- <com.developer.gbuttons.GoogleSignInButton
+            android:id="@+id/btnuserloginGoogle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+
+            android:layout_marginTop="5dp"
+
+            android:text="@string/google_sign_up"
+            app:isDarkTheme="false" />-->
+        <!--    <com.shaishavgandhi.loginbuttons.GoogleButton
+                android:id="@+id/btnuserLoginGoogle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:shadowColor="@color/black"
+
+                android:layout_marginTop="5dp"
+                android:text="Sign in with Google"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                app:iconSize="30dp" />-->
+
+
+    </LinearLayout>
+    <!--   </ScrollView>-->
+
+    <View
+        android:layout_width="11dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/ic_side_bg" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="11dp"
+        android:layout_marginBottom="30dp"
+        android:minWidth="48dp"
+        android:onClick="onLoginClick"
+        android:src="@drawable/ic_add_img" />
+
+</RelativeLayout>

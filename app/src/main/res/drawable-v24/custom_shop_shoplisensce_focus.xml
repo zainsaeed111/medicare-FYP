@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <selector xmlns:android="http://schemas.android.com/apk/res/android">
+        <item
+            android:state_focused="false"
+            android:drawable="@drawable/lisence_icon"
+            /> <!-- not focused -->
+        <item
+            android:state_focused="true"
+            android:drawable="@drawable/lisencse_icon_focused"
+            /> <!-- focused -->
+    </selector>

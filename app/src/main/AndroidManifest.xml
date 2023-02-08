@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mediworld">
+    <!-- permission -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -10,13 +18,32 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MediWorld">
         <activity
+            android:name=".shop_login"
+            android:exported="false" />
+        <activity
+            android:name=".order_from_picture"
+            android:exported="false" />
+        <activity
+            android:name=".OrderNow_Shop"
+            android:exported="false" />
+        <activity
+            android:name=".shop_basic"
+            android:exported="false" />
+        <activity
+            android:name=".ShopResgister"
+            android:exported="false" />
+        <activity
+            android:name=".Registeri"
+            android:exported="false" />
+        <activity
+            android:name=".ordermedicine_test"
+            android:exported="false" />
+        <activity
             android:name=".selectuser"
             android:exported="false" />
         <activity
             android:name=".custom_bottom_menu"
-            android:exported="false">
-
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".user_register_activity"
             android:exported="false" />
@@ -25,7 +52,7 @@
             android:exported="false" />
         <activity
             android:name=".user_basic_activity"
-            android:exported="true"></activity>
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

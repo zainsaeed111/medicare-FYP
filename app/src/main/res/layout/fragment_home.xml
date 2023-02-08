@@ -6,56 +6,65 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:id="@+id/mainuser_dash"
-    android:padding="0dp"
+    android:padding="@dimen/_1sdp"
+    android:background="@color/white"
     tools:context=".home">
-   <RelativeLayout
-      android:fitsSystemWindows="true"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:background="@drawable/dahsboard_layout_shadow_back"
-       android:outlineSpotShadowColor="@color/grey"
-       android:outlineAmbientShadowColor="@color/grey"
-       android:padding="15dp">
+
+    <RelativeLayout
+        android:fitsSystemWindows="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dahsboard_layout_shadow_back"
+        android:outlineSpotShadowColor="@color/grey"
+        android:outlineAmbientShadowColor="@color/grey"
+        android:padding="15dp">
 
 
-       <ImageView
-           android:id="@+id/imgProfile"
-           android:layout_width="50dp"
-           android:layout_height="50dp"
-           android:layout_centerVertical="true"
-           android:src="@drawable/dashobard_profileicon">
+        <ImageView
+            android:id="@+id/imgProfile"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/dashobard_profileicon">
 
-       </ImageView>
+        </ImageView>
 
-       <ImageView
-           android:paddingTop="7dp"
-           android:paddingLeft="5dp"
-           android:id="@+id/imgInfo"
-           android:layout_width="40dp"
-           android:layout_height="40dp"
-           android:layout_alignParentRight="true"
-           android:src="@drawable/dashobard_infoiconii">
+        <ImageView
+            android:paddingTop="@dimen/_7sdp"
+            android:paddingLeft="@dimen/_5sdp"
+            android:id="@+id/imgInfo"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/dashobard_infoiconii">
 
-       </ImageView>
+        </ImageView>
 
 
-       <ImageView
+        <ImageView
 
-           android:id="@+id/img"
-           android:layout_width="40dp"
-           android:layout_height="40dp"
-           android:layout_marginLeft="20dp"
-           android:layout_toLeftOf="@+id/imgInfo"
-           android:layout_centerVertical="true"
-           android:src="@drawable/dashobard_ordersiconi">
-           </ImageView>
+            android:id="@+id/img"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginLeft="20dp"
+            android:layout_toLeftOf="@+id/imgInfo"
+            android:layout_centerVertical="true"
+            android:src="@drawable/dashobard_ordersiconi">
+        </ImageView>
 
-   </RelativeLayout>
+    </RelativeLayout>
 
     <ScrollView
+        android:layout_marginBottom="@dimen/_15sdp"
+        android:id="@+id/scrollView"
+        android:animateLayoutChanges="true"
+        android:fillViewport="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
+
+
     <LinearLayout
+        android:isScrollContainer="true"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -65,11 +74,12 @@
 
 
 
+
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="View Your Orders"
-                android:textColor="@color/grey"
+                android:textColor="@color/primary_color"
                 android:textStyle="italic"
                 android:drawableEnd="@drawable/button_arrow_dashboard"
                 android:drawableStart="@drawable/view_order_button_icon"
@@ -82,18 +92,398 @@
 
 
 
+
+
+
+
+
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Latest Offer and Discounts"
+            android:layout_marginTop="8dp"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"></TextView>
+
+
+        <!--card Slider View-->
+        <androidx.cardview.widget.CardView
+            app:cardCornerRadius="10dp"
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.smarteist.autoimageslider.SliderView
+                android:padding="1dp"
+                android:id="@+id/image_slider"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:sliderAnimationDuration="600"
+                app:sliderAutoCycleDirection="right"
+                app:sliderIndicatorSelectedColor="@color/primary_color"
+                app:sliderIndicatorUnselectedColor="@color/white"
+                app:sliderIndicatorPadding="3dp"
+                app:sliderIndicatorOrientation="horizontal"
+                app:sliderIndicatorRadius="2dp"
+                app:sliderScrollTimeInSec="2"
+                app:sliderAutoCycleEnabled="true"
+                app:sliderStartAutoCycle="true"></com.smarteist.autoimageslider.SliderView>
+
+        </androidx.cardview.widget.CardView>
+
+
+
+
+
+
+
         <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="See Features"
                     android:layout_marginTop="8dp"
                     android:textSize="20sp"
-                    android:textColor="@color/primary_color"
+                    android:textColor="@color/black"
                     android:textStyle="bold"></TextView>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="3"
+            android:orientation="horizontal">
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+
+                android:foreground="?attr/selectableItemBackground"
+                android:clickable="true"
+                app:cardCornerRadius="10dp"
+                android:forceDarkAllowed="false"
+                app:cardElevation="5dp"
+                android:layout_margin="5dp">
+
+                <LinearLayout
+                    android:id="@+id/orderMedicinebox"
+                    android:background="@color/white"
+                    android:forceDarkAllowed="false"
+                    android:padding="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@drawable/ordermedicineicone_i_dashboard"
+                        android:layout_gravity="center"></ImageView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textAlignment="center"
+                        android:textColor="@color/primary_color"
+                        android:textStyle="bold"
+                        android:text="Order\nMedicines"></TextView>
+
+
+                </LinearLayout>
+
+
+
+
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:forceDarkAllowed="false"
+                android:foreground="?attr/selectableItemBackground"
+                android:clickable="true"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp"
+                android:layout_margin="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:forceDarkAllowed="false"
+                    android:padding="5dp">
+
+
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@drawable/aidctor_i_dashboard"
+                        android:layout_gravity="center"></ImageView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+                        android:textColor="@color/primary_color"
+                        android:text="AI Medicine\n Assistant"></TextView>
+
+
+                </LinearLayout>
+
+
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:forceDarkAllowed="false"
+                android:foreground="?attr/selectableItemBackground"
+                android:clickable="true"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp"
+                android:layout_margin="5dp">
+
+                <LinearLayout
+                    android:padding="5dp"
+                    android:forceDarkAllowed="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@drawable/viewstore_i_dashboard"
+                        android:layout_gravity="center"></ImageView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textAlignment="center"
+                        android:textColor="@color/primary_color"
+                        android:textStyle="bold"
+                        android:text="Nearby Pharmcies"></TextView>
+
+
+                </LinearLayout>
+
+
+
+
+            </androidx.cardview.widget.CardView>
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="3"
+            android:orientation="horizontal">
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+
+                android:foreground="?attr/selectableItemBackground"
+                android:clickable="true"
+                app:cardCornerRadius="10dp"
+                android:forceDarkAllowed="false"
+                app:cardElevation="5dp"
+                android:layout_margin="5dp">
+
+                <LinearLayout
+                    android:forceDarkAllowed="false"
+                    android:padding="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@drawable/dashboardiconoi"
+                        android:layout_gravity="center"></ImageView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textAlignment="center"
+                        android:textColor="@color/primary_color"
+                        android:textStyle="bold"
+                        android:text="Nearby\nHospitals"></TextView>
+
+
+                </LinearLayout>
+
+
+
+
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:forceDarkAllowed="false"
+                android:foreground="?attr/selectableItemBackground"
+                android:clickable="true"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp"
+                android:layout_margin="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:forceDarkAllowed="false"
+                    android:padding="5dp">
+
+
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@drawable/userdashboardiconeiv"
+                        android:layout_gravity="center"></ImageView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+                        android:textColor="@color/primary_color"
+                        android:text="Emergency\nNumbers"></TextView>
+
+
+                </LinearLayout>
+
+
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:forceDarkAllowed="false"
+                android:foreground="?attr/selectableItemBackground"
+                android:clickable="true"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp"
+                android:layout_margin="5dp">
+
+                <LinearLayout
+                    android:padding="5dp"
+                    android:forceDarkAllowed="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@drawable/userdashboardiconevi"
+                        android:layout_gravity="center"></ImageView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textAlignment="center"
+                        android:textColor="@color/primary_color"
+                        android:textStyle="bold"
+                        android:text="Online\n Pharmacies"></TextView>
+
+
+                </LinearLayout>
+
+
+
+
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Health Blogs"
+            android:layout_marginTop="8dp"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"></TextView>
+
+<!--Follow Us On-->
+
+       <!-- <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="3"
+            android:background="@color/primary"
+            android:orientation="horizontal">
+
+
+            <LinearLayout
+                android:layout_marginBottom="@dimen/_15sdp"
+                android:background="@color/white"
+                android:forceDarkAllowed="false"
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:padding="5dp"
+                    android:src="@drawable/userdashboardfoolowus_iconi"
+                    android:layout_gravity="center"></ImageView>
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:padding="@dimen/_5sdp"
+                    android:src="@drawable/ic_facebook"
+                    android:layout_gravity="center"></ImageView>
+
+
+                <ImageView
+                    android:padding="@dimen/_5sdp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/google"
+                    android:layout_gravity="center"></ImageView>
+
+
+            </LinearLayout>
+
+
+
+
+
+        </LinearLayout>
+
+-->
+
+
+
 
 
 
     </LinearLayout>
-
     </ScrollView>
-</LinearLayout>
+    </LinearLayout>
