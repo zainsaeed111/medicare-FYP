@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Shop.AddProduct">
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/shop_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/include">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#F8F8F8"
+                    android:forceDarkAllowed="false"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_25sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="5dp"
+                        android:text="Catogery"
+                        android:textColor="@color/black" />
+
+                    <com.skydoves.powerspinner.PowerSpinnerView
+                        android:id="@+id/droplistaddproductCatogery"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/custom_edittext"
+                        android:drawablePadding="10dp"
+                        android:padding="15dp"
+                        android:textColor="@color/black"
+                        app:spinner_arrow_tint="@color/black"
+                        app:spinner_item_array="@array/catogery"
+                        app:spinner_popup_animation="normal">
+
+                    </com.skydoves.powerspinner.PowerSpinnerView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="5dp"
+                        android:text="Product Name:"
+                        android:textColor="@color/black" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etaddproductName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/custom_edittext"
+                        android:drawablePadding="10dp"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:padding="15dp"
+                        android:textColor="@color/black">
+
+                    </com.google.android.material.textfield.TextInputEditText>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="5dp"
+                        android:text="One Line Description (Optional):"
+                        android:textColor="@color/black" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etaddproductDescription"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/custom_edittext"
+                        android:drawablePadding="10dp"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:padding="15dp"
+                        android:textColor="@color/black">
+
+                    </com.google.android.material.textfield.TextInputEditText>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="5dp"
+                        android:text="Company Name:"
+                        android:textColor="@color/black" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etaddproductCompany"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/custom_edittext"
+                        android:drawablePadding="10dp"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:padding="15dp"
+                        android:textColor="@color/black">
+
+                    </com.google.android.material.textfield.TextInputEditText>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="5dp"
+                        android:text="Product Price"
+                        android:textColor="@color/black" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etaddproductPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/custom_edittext"
+                        android:drawablePadding="10dp"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:padding="15dp"
+                        android:textColor="@color/black"></com.google.android.material.textfield.TextInputEditText>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="5dp"
+                        android:text="Discount% (Optionnal)"
+                        android:textColor="@color/black" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etaddproductDiscount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/custom_edittext"
+                        android:drawablePadding="10dp"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:padding="15dp"
+                        android:textColor="@color/black"></com.google.android.material.textfield.TextInputEditText>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="5dp"
+                        android:text="Discounted Price"
+                        android:textColor="@color/black" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etaddproductDiscountedprice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/custom_edittext"
+                        android:drawablePadding="10dp"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:padding="15dp"
+                        android:textColor="@color/black"></com.google.android.material.textfield.TextInputEditText>
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="5dp"
+                        android:text="Add Image"
+                        android:textColor="@color/black" />
+
+
+                    <LinearLayout
+                        android:id="@+id/addProductlinear"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/doted_border"
+                        android:orientation="vertical"
+                        android:padding="@dimen/_20sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+
+                        <ImageView
+                            android:id="@+id/imgProduct"
+                            android:layout_width="@dimen/_40sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:src="@drawable/add_img_icon_addproduct"
+                            android:textStyle="bold">
+
+
+                        </ImageView>
+
+
+                    </LinearLayout>
+
+
+
+
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/saveProduct"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginBottom="@dimen/_15sdp"
+                        android:background="@drawable/button_transparent_back"
+                        android:text="Next"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_12sdp">
+
+
+                    </androidx.appcompat.widget.AppCompatButton>
+
+
+                </LinearLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

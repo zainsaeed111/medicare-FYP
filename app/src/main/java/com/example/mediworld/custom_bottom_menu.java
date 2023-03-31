@@ -29,14 +29,17 @@ public class custom_bottom_menu<Unit> extends AppCompatActivity {
         getSupportActionBar().hide();
         bottomNavigation=findViewById(R.id.bottomNav);
 
-        bottomNavigation.add(new MeowBottomNavigation.Model(ID_home, R.drawable.custombottommenu_home));
+     /*   bottomNavigation.add(new MeowBottomNavigation.Model(ID_home, R.drawable.custombottommenu_home));
         bottomNavigation.add(new MeowBottomNavigation.Model(ID_chat, R.drawable.custombottommenu_chat));
         bottomNavigation.add(new MeowBottomNavigation.Model(ID_about, R.drawable.custombottommenu_about));
-        bottomNavigation.add(new MeowBottomNavigation.Model(ID_profile, R.drawable.custombottommenu_profile));
+        bottomNavigation.add(new MeowBottomNavigation.Model(ID_profile, R.drawable.custombottommenu_profile));*/
+/*
         bottomNavigation.setOnShowListener(new MeowBottomNavigation.ShowListener() {
+*/
 /*
             @SuppressLint("StringFormatInvalid")
-*/
+*//*
+
             @Override
             public void onShowItem(MeowBottomNavigation.Model item) {
                 String name;
@@ -66,24 +69,29 @@ public class custom_bottom_menu<Unit> extends AppCompatActivity {
 
 
         });
+*/
 
+/*
         bottomNavigation.setOnClickMenuListener(new MeowBottomNavigation.ClickListener() {
             @Override
             public void onClickItem(MeowBottomNavigation.Model item) {
 
             }
         });
+*/
 
         bottomNavigation.show(ID_home,true);
 
 
 
     }
+/*
     private void replace(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.nav_Host,fragment,null);
         transaction.commit();
     }
+*/
 }
 
 

@@ -15,8 +15,8 @@ public class selectuser extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_selectuser);
-        iconbtnuser = findViewById(R.id.iconbtn_user);
-        iconbtnshop = findViewById(R.id.icobtn_shop);
+        iconbtnuser = findViewById(R.id.imgNotification);
+        iconbtnshop = findViewById(R.id.imgii);
         iconbtnuser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

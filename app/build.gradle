@@ -1,15 +1,16 @@
 plugins {
     id 'com.android.application'
     id 'com.google.gms.google-services'
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.example.mediworld"
         minSdk 21
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -32,14 +33,20 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.navigation:navigation-fragment:2.4.0'
+    implementation 'androidx.navigation:navigation-ui:2.4.0'
     implementation 'com.github.smarteist:autoimageslider:1.4.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
      implementation 'com.google.android.material:material:1.6.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'com.google.firebase:firebase-database:20.0.5'
+    implementation 'com.google.firebase:firebase-database:20.1.0'
     implementation 'com.google.firebase:firebase-auth:21.1.0'
     implementation 'com.google.firebase:firebase-ml-vision:24.1.0'
+    implementation 'androidx.navigation:navigation-fragment:2.5.3'
+    implementation 'androidx.navigation:navigation-ui:2.5.3'
+    implementation 'com.google.android.libraries.places:places:2.5.0'
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
@@ -64,6 +71,17 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:18.1.0'
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     implementation'com.basgeekball:awesome-validation:2.0'
+    implementation 'com.google.android.libraries.places:places:3.0.0'
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+    implementation 'com.google.android.gms:play-services-location:20.0.0'
+    implementation 'com.google.android.gms:play-services-location:18.0.0'
+    implementation "com.github.skydoves:powerspinner:1.2.5"
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    implementation 'com.mikhaellopez:circularimageview:4.3.1'
+
+
+
+//    implementation 'com.github.pdrozz:pinview:1.0.3'
 
     // implementation 'com.cuboid:cuboidcirclebutton:1.0.5'
 

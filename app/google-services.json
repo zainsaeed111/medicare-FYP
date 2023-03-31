@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "212877107746",
+    "firebase_url": "https://medi-world-cf6cb-default-rtdb.firebaseio.com",
     "project_id": "medi-world-cf6cb",
     "storage_bucket": "medi-world-cf6cb.appspot.com"
   },

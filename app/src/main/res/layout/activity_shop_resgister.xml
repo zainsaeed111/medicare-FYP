@@ -133,27 +133,48 @@
 
 
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etpassUsereg"
-                        android:inputType="textPassword"
-                        app:passwordToggleEnabled="true"
-                        android:layout_width="match_parent"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:background="@color/white"
                         android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        app:passwordToggleTint="@color/grey"
+                        app:passwordToggleEnabled="true"
+                        app:hintEnabled="false"
                         android:layout_marginBottom="20dp"
-                        android:background="@drawable/custom_edittext"
-                        android:drawableStart="@drawable/custom_password_focus"
-                        android:drawablePadding="10dp"
+                        app:hintAnimationEnabled="false"
+                        app:boxBackgroundMode="none">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etpassUsereg"
+                            android:inputType="textPassword"
+                            app:passwordToggleEnabled="true"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/custom_edittext"
+                            android:drawableStart="@drawable/custom_password_focus"
+                            android:drawablePadding="10dp"
 
-                        android:hint="Password"
-                        android:padding="12.5dp"
-                        android:textColor="@color/grey"
-                        android:textColorHint="@color/grey" />
+                            android:hint="Password"
+                            android:padding="12.5dp"
+                            android:textColor="@color/grey"
+                            android:textColorHint="@color/grey" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:background="@color/white"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        app:passwordToggleTint="@color/grey"
+                        app:passwordToggleEnabled="true"
+                        app:hintEnabled="false"
+                        android:layout_marginBottom="20dp"
+                        app:hintAnimationEnabled="false"
+                        app:boxBackgroundMode="none">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etpassconfirmUsereg"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="20dp"
                         android:background="@drawable/custom_edittext"
                         android:drawableStart="@drawable/custom_password_focus"
                         android:drawablePadding="10dp"
@@ -162,7 +183,7 @@
                         android:padding="12.5dp"
                         android:textColor="@color/grey"
                         android:textColorHint="@color/grey" />
-
+                    </com.google.android.material.textfield.TextInputLayout>
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btnregShopreg"
                         android:layout_width="match_parent"
@@ -172,6 +193,7 @@
                         android:textStyle="bold"
                         android:textAlignment="center"
                         android:gravity="center"
+                        android:clickable="true"
                         android:background="@drawable/button_background_reg_login"
                         android:minHeight="48dp"
                         android:text="Register"

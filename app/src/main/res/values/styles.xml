@@ -46,5 +46,12 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:paddingLeft">5dp</item>
     </style>
+    <style name="BottomNavigation" parent="Widget.MaterialComponents.BottomNavigationView">
+        <!-- Customize the color of the selected item -->
+        <item name="itemTextColor">@color/primary</item>
+        <item name="itemIconTint">@color/primary</item>
+
+
+    </style>
 
 </resources>

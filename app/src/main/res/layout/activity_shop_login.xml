@@ -43,23 +43,33 @@
         </RelativeLayout>
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etshopnameShopLog"
+            android:id="@+id/etregnoshopLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_20sdp"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/custom_edittext"
-            android:drawableStart="@drawable/custom_shop_shopname_focus"
-            android:drawablePadding="@dimen/_10sdp"
-            android:elevation="3dp"
-            android:hint="Shop Name"
+            android:drawableStart="@drawable/custom_shop_shoplisensce_focus"
+            android:drawablePadding="10dp"
+            android:hint="Medical Licesence No"
+            android:inputType="text"
             android:padding="12.5dp"
             android:textColor="@color/grey"
             android:textColorHint="@color/grey" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:background="@color/white"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            app:passwordToggleTint="@color/grey"
+            app:passwordToggleEnabled="true"
+            app:hintEnabled="false"
+            android:layout_marginBottom="5dp"
+            app:hintAnimationEnabled="false"
+            app:boxBackgroundMode="none">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etpassShopLog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
             android:background="@drawable/custom_edittext"
             android:drawableStart="@drawable/custom_password_focus"
             android:drawablePadding="10dp"
@@ -70,7 +80,7 @@
             android:textColorHint="@color/grey"
             app:passwordToggleEnabled="true"></com.google.android.material.textfield.TextInputEditText>
 
-
+        </com.google.android.material.textfield.TextInputLayout>
         <TextView
 
             style="@style/viewParent"
@@ -94,7 +104,7 @@
 
 
         <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
-            android:id="@+id/userLoginBtn"
+            android:id="@+id/shopLoginBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"

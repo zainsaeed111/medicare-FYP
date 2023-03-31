@@ -1,27 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/userHome"
-        android:title="Home"
-        android:icon="@drawable/userhome_bn"/>
+
 
     <item
-        android:id="@+id/userChat"
+        android:id="@+id/chat"
         android:title="Chat"
-        android:icon="@drawable/user_chat_bn"/>
+
+        android:icon="@drawable/btm_chat_selector"/>
+
 
     <item
-        android:id="@+id/userAdd"
-        android:title="Add"
-        android:enabled="false"/>
+        android:id="@+id/home2"
+        android:title="Home"
+        android:icon="@drawable/btm_home_selector"/>
+
 
     <item
-        android:id="@+id/userProfile"
+        android:id="@+id/profile"
         android:title="Profile"
-        android:icon="@drawable/user_person_bn"/>
+        android:icon="@drawable/btm_profile_selector"/>
 
-    <item
-        android:id="@+id/userAbout"
-        android:title="About"
-        android:icon="@drawable/about_bn"></item>
 </menu>

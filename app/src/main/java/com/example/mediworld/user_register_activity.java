@@ -1,30 +1,22 @@
 package com.example.mediworld;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.basgeekball.awesomevalidation.utility.RegexTemplate;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.HashMap;
 
 public class user_register_activity extends AppCompatActivity implements View.OnClickListener {
 
@@ -179,7 +171,8 @@ tvloginUsereg.setOnClickListener(new View.OnClickListener() {
 
         }
 
-    /*private void registerUser() {
+/*
+    private void registerUser() {
         String username = etusernameUsereg.getText().toString().trim();
         String email = etemailUsereg.getText().toString().trim();
         String password = etpassUsereg.getText().toString().trim();
@@ -199,24 +192,14 @@ tvloginUsereg.setOnClickListener(new View.OnClickListener() {
         if(!confirmpass.isEmpty()){ } else{etpassconfirmUsereg.setError("Confirm Password Please*"); }
         if(!phone.isEmpty()){ } else{etphoneUsereg.setError("Enter Email Please*"); }
 
-    }*/
+    }
+*/
+
 
 
 }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

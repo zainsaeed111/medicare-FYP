@@ -2,28 +2,27 @@ package com.example.mediworld;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
-import android.provider.ContactsContract;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.LinearLayout;
-
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.smarteist.autoimageslider.SliderView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class home extends Fragment {
 
    LinearLayout orderMedicinebox;
+   LinearLayout aimedicineBox;
+   LinearLayout emgNumBox;
     View view;
     SliderView sliderView;
     ArrayList<Integer> arrayList= new ArrayList<>();
@@ -38,6 +37,9 @@ public class home extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
        orderMedicinebox=getView().findViewById(R.id.orderMedicinebox);
+        emgNumBox=getView().findViewById(R.id.emgNumBox);
+        aimedicineBox=getView().findViewById(R.id.aimedicineBox);
+
         sliderView=getView().findViewById(R.id.image_slider);
         arrayList.add(R.drawable.sliderimgiii);
         arrayList.add(R.drawable.sliderimgn);
@@ -53,6 +55,28 @@ public class home extends Fragment {
                 Intent intent = new Intent(getActivity(),OrderNow_Shop.class);
                 startActivity(intent);
 
+            }
+        });
+
+        aimedicineBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                NavController navController = Navigation.findNavController(view);
+
+// Navigate to the destination fragment
+                navController.navigate(R.id.userAIMedicalAssitant);
+            }
+        });
+
+        emgNumBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Obtain an instance of the NavController
+                NavController navController = Navigation.findNavController(view);
+
+// Navigate to the destination fragment
+                navController.navigate(R.id.emergencyNumbers);
             }
         });
 

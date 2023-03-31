@@ -17,4 +17,12 @@
     <string name="registration_success">Registered Successfully</string>
     <string name="input_error_email_invalid">enter a valid email</string>
     <string name="input_comifrm_pass_invalid">Please Confirm Password</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string-array name="catogery">
+        <item>Medicine</item>
+        <item>General</item>
+        <item>Cosmetics</item>
+        <item>Suppliments</item>
+    </string-array>
+
 </resources>

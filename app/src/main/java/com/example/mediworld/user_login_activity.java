@@ -36,6 +36,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.concurrent.TimeUnit;
+
 public class user_login_activity extends AppCompatActivity {
 
     TextView tvRegisterUselog;
@@ -59,24 +61,7 @@ public class user_login_activity extends AppCompatActivity {
        etusernameUserLog= findViewById(R.id.etusernameUserLog);
       //  etuseremailUserLog= findViewById(R.id.etuseremailUserLog);
 
-
         mAuth = FirebaseAuth.getInstance();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         userLoginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,7 +85,6 @@ public class user_login_activity extends AppCompatActivity {
 
 
 
-
         tvRegisterUselog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,6 +95,11 @@ public class user_login_activity extends AppCompatActivity {
         });
 
 
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        FirebaseAuth.getInstance().signOut();
     }
 
     private boolean validatePassword() {
@@ -142,64 +131,6 @@ public class user_login_activity extends AppCompatActivity {
 
 
     }
-
-   /* private void checkUser() {
-
-
-
-        String username = etusernameUserLog.getText().toString();
-        String Pass = etpassUserLog.getText().toString();
-
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("MyUser");
-        Query checkUserDatabase = reference.orderByChild("username").equalTo(username);
-
-
-        checkUserDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                if (snapshot.exists()){
-                    etusernameUserLog.setError(null);
-                    String passwordFromDB = snapshot.child(username).child("password").getValue(String.class);
-
-                    if (passwordFromDB.equals(Pass)){
-                        etusernameUserLog.setError(null);
-
-                        //Pass the data using intent
-
-                        String nameFromDB = snapshot.child(username).child("username").getValue(String.class);
-                        String emailFromDB = snapshot.child(username).child("email").getValue(String.class);
-                        String usernameFromDB = snapshot.child(username).child("phone").getValue(String.class);
-                        String PassFromDB = snapshot.child(username).child("password").getValue(String.class);
-
-                        Intent intent = new Intent(user_login_activity.this, custom_bottom_menu.class);
-
-                        intent.putExtra("username", nameFromDB);
-                        intent.putExtra("email", emailFromDB);
-                        intent.putExtra("phone", usernameFromDB);
-                        intent.putExtra("password", passwordFromDB);
-
-                        startActivity(intent);
-                    } else {
-                        etpassUserLog.setError("Invalid Credentials");
-                        etpassUserLog.requestFocus();
-                    }
-                } else {
-                    etusernameUserLog.setError("User does not exist");
-                    etusernameUserLog.requestFocus();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-
-
-        });*/
-
-
-
     private void LoginUser() {
 
 
@@ -210,7 +141,8 @@ public class user_login_activity extends AppCompatActivity {
      FirebaseDatabase firebaseDatabase  = FirebaseDatabase.getInstance();
      DatabaseReference databaseReference = firebaseDatabase.getReference("MyUser");
      Query check_username= databaseReference.orderByChild("username").equalTo(username);
-     check_username.addListenerForSingleValueEvent(new ValueEventListener() {
+
+        check_username.addListenerForSingleValueEvent(new ValueEventListener() {
          @Override
          public void onDataChange(@NonNull DataSnapshot snapshot) {
              if(snapshot.exists()){
@@ -219,7 +151,7 @@ public class user_login_activity extends AppCompatActivity {
                 //Check password
                  String check_pass = snapshot.child(username).child("confirmpassword").getValue(String.class);
                  if(check_pass.equals(password)){
-                     etpassUserLog.setError(null); Intent intent = new Intent(getApplicationContext(), custom_bottom_menu.class);
+                     etpassUserLog.setError(null); Intent intent = new Intent(getApplicationContext(), MainBasic.class);
                      startActivity(intent);
                      finish();
                      overridePendingTransition(R.anim.slide_in_left, android.R.anim.slide_out_right);}
@@ -237,80 +169,7 @@ public class user_login_activity extends AppCompatActivity {
          }
      });
 
-
-
-
-/*
-        if (TextUtils.isEmpty(Email)) {
-            Toast.makeText(this, "Email is Empty", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (TextUtils.isEmpty(Pass)) {
-            Toast.makeText(this, "Password is Empty", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (Pass.length() < 8) {
-            Toast.makeText(this, "Password be greater than 6 characters", Toast.LENGTH_SHORT).show();
-            return;
-
-        }
-
-        else{
-
-
-
-        }
-        */
-
-        /*mAuth.signInWithEmailAndPassword(Email, Pass)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-
-                        if (task.isSuccessful()) {
-
-                            startActivity(new Intent(user_login_activity.this,MainActivity.class));
-                            Toast.makeText(user_login_activity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
-
-                        } else {
-                            Toast.makeText(user_login_activity.this, "Login error Check Pass or Email", Toast.LENGTH_SHORT).show();
-
-                        }
-
-                    }
-                });*/
-
-
     }
-
-
-
-
-
-   /* private boolean validatePassword() {
-        loginpassword = etpassUserLog.getText().toString().trim();
-        if (TextUtils.isEmpty(loginpassword)) {
-            Toast.makeText(user_login_activity.this, "Enter Your Password", Toast.LENGTH_SHORT).show();
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    private boolean validatePhone() {
-        loginphone = etphoneUserLog.getText().toString().trim();
-        if (TextUtils.isEmpty(loginphone)) {
-            Toast.makeText(user_login_activity.this, "Enter Your Email", Toast.LENGTH_SHORT).show();
-            return false;
-        } else if (!Patterns.EMAIL_ADDRESS.matcher(loginphone).matches()) {
-            Toast.makeText(user_login_activity.this, "Please enter valid Email", Toast.LENGTH_SHORT).show();
-            return false;
-        } else {
-            return true;
-        }
-    }*/
-
 
     public void onLoginClick(View view) {
         startActivity(new Intent(this, user_register_activity.class));

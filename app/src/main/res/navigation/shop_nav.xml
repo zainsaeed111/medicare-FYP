@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/shop_nav"
+    app:startDestination="@id/bnhomeShop">
+
+    <fragment
+        android:id="@+id/bnhomeShop"
+        android:name="com.example.mediworld.Shop.ShopHome"
+        android:label="fragment_shop_home"
+        tools:layout="@layout/fragment_shop_home" />
+    <fragment
+        android:id="@+id/bnmyShop"
+        android:name="com.example.mediworld.Shop.MyShop"
+        android:label="fragment_my_shop"
+        tools:layout="@layout/fragment_my_shop" />
+    <fragment
+        android:id="@+id/bnchatShop"
+        android:name="com.example.mediworld.chat"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chat" />
+    <fragment
+        android:id="@+id/addProduct"
+        android:name="com.example.mediworld.Shop.AddProduct"
+        android:label="fragment_add_product"
+        tools:layout="@layout/fragment_add_product" />
+</navigation>
