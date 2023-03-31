@@ -40,7 +40,7 @@ public class ShopHome extends Fragment {
                 NavController navController = Navigation.findNavController(view);
 
 // Navigate to the destination fragment
-                navController.navigate(R.id.addProduct);
+                navController.navigate(R.id.addProductFragment2);
             }
         });
         // Use binding to access views

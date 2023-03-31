@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Shop.AddProduct">
+    tools:context=".Shop.AddProductFragment">
 
     <include
         android:id="@+id/include"
@@ -224,7 +224,19 @@
 
 
                         </ImageView>
+                        <ImageView
+                            android:id="@+id/selectedImg"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:scaleType="centerCrop"
+                            android:gravity="center"
+                            android:visibility="gone"
+                            android:src="@drawable/add_img_icon_addproduct"
+                            android:textStyle="bold">
 
+
+                        </ImageView>
 
                     </LinearLayout>
 

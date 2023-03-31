@@ -21,8 +21,8 @@
         android:label="fragment_chat"
         tools:layout="@layout/fragment_chat" />
     <fragment
-        android:id="@+id/addProduct"
-        android:name="com.example.mediworld.Shop.AddProduct"
+        android:id="@+id/addProductFragment2"
+        android:name="com.example.mediworld.Shop.AddProductFragment"
         android:label="fragment_add_product"
         tools:layout="@layout/fragment_add_product" />
 </navigation>
