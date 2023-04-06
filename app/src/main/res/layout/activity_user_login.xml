@@ -75,6 +75,7 @@
 
             <TextView
 
+                android:id="@+id/tvforgetPassword"
                 style="@style/viewParent"
                 android:layout_gravity="end"
                 android:text="Forgot Password?"

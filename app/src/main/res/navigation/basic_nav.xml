@@ -35,4 +35,9 @@
         android:name="com.example.mediworld.UserAIMedicalAssitant"
         android:label="fragment_user_a_i_medical_assitant"
         tools:layout="@layout/fragment_user_a_i_medical_assitant" />
+    <fragment
+        android:id="@+id/userNearbyHospitals"
+        android:name="com.example.mediworld.UserNearbyHospitals"
+        android:label="fragment_user_nearby_hospitals"
+        tools:layout="@layout/fragment_user_nearby_hospitals" />
 </navigation>

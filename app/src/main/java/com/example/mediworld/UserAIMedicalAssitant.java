@@ -1,15 +1,18 @@
 package com.example.mediworld;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -20,6 +23,9 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -78,6 +84,10 @@ public class UserAIMedicalAssitant extends Fragment {
         EditText medicineInputEditText = view.findViewById(R.id.medicine_input);
         Button submitButton = view.findViewById(R.id.submit_button);
         TextView botResponseTextView = view.findViewById(R.id.bot_response);
+
+        // Initialize the inputMethodManager object
+        InputMethodManager inputMethodManager = (InputMethodManager) requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,6 +147,9 @@ public class UserAIMedicalAssitant extends Fragment {
                                             + "Product Type: " + productType;
                                     botResponseTextView.setText(info);
 
+                                    // Hide the keyboard
+                                    inputMethodManager.hideSoftInputFromWindow(medicineInputEditText.getWindowToken(), 0);
+
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -145,19 +158,21 @@ public class UserAIMedicalAssitant extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         botResponseTextView.setText("An error occurred while getting information for " + medicineName);
-                        error.printStackTrace();
                     }
-                });
+                }) {
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        Map<String, String> headers = new HashMap<>();
+                        headers.put("Authorization", "Bearer sYn8sqCsRoD3qEyasyK1fGxNJFuA6BGQAdcZbotr");
+                        return headers;
+                    }
+                };
 
                 queue.add(stringRequest);
             }
         });
 
 
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user_a_i_medical_assitant, container, false);
-
-
-
-    }
-    }
+        // Return the inflated view
+        return view;
+    }}

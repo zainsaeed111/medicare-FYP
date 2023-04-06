@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
     <!--
     TODO: Before you release your application, you need a Google Maps API key.
 
@@ -17,6 +17,5 @@
     string in this file.
     -->
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">
-    AIzaSyA6S4B2Wu44TjWjy7WI8y1EBvVsRFedXJ4
-    </string>
+AIzaSyDYkFIZlXNg06_V8R1S-hBgBB5xz6wTZRs    </string>
 </resources>

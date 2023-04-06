@@ -99,14 +99,23 @@ public class AddProductFragment extends Fragment {
             imageUri = data.getData();
 
             // Hide the "imgProduct" ImageView and show the "selectedImg" ImageView
-            binding.imgProduct.setVisibility(View.GONE);
-            binding.selectedImg.setVisibility(View.VISIBLE);
+            binding.addProductlinear.setVisibility(View.GONE);
+            binding.alreadyaddProductlayout.setVisibility(View.VISIBLE);
 
             // Load the selected image into the "selectedImg" ImageView
             Glide.with(requireActivity())
                     .load(imageUri)
                     .into(binding.selectedImg);
         }
+
+        binding.removeIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                binding.addProductlinear.setVisibility(View.VISIBLE);
+                binding.alreadyaddProductlayout.setVisibility(View.GONE);
+
+            }
+        });
 
 
 
