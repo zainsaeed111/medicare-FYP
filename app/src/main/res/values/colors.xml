@@ -9,7 +9,10 @@
     <color name="primary_colori">#C60198FF</color>
     <color name="primary">#200198FF</color>
     <color name="black">#FF000000</color>
+    <color name="gray_5">#CACACA</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="intro_screen_dialog_text">#707070</color>
+
     <color name="grey">#B1AEAE</color>
     <color name="register_button_color">#E91E63</color>
     <color name="darkTextColor">#020000</color>

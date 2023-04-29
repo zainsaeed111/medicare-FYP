@@ -96,7 +96,7 @@
 -->
 
 
-            <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/userLoginBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -112,7 +112,7 @@
                 app:initialCornerAngle="27dp"
                 app:spinning_bar_color="#FFF"
                 app:spinning_bar_padding="6dp"
-                app:spinning_bar_width="4dp"></br.com.simplepass.loading_button_lib.customViews.CircularProgressButton>
+                app:spinning_bar_width="4dp"></androidx.appcompat.widget.AppCompatButton>
 
             <TextView
                 style="@style/parent"

@@ -1,120 +1,173 @@
 package com.example.mediworld;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.example.mediworld.databinding.FragmentUserNearbyHospitalsBinding;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class UserNearbyHospitals extends Fragment implements OnMapReadyCallback, LocationListener {
-
+public class UserNearbyHospitals extends Fragment {
     private GoogleMap mMap;
-    private LocationManager locationManager;
-    private static final long MIN_TIME = 400;
-    private static final float MIN_DISTANCE = 1000;
-    private MarkerOptions userMarkerOptions;
+    private static final int REQUEST_CODE = 181;
 
-    private List<Hospital> hospitals = new ArrayList<>();
-    private static final int MAX_DISTANCE = 15000; // in meters
+    private FragmentUserNearbyHospitalsBinding binding;
+    private FusedLocationProviderClient fusedLocationProviderClient;
+    private static final int Request_code = 181;
+    private double lat,lnt;
+    private OnMapReadyCallback callback = new OnMapReadyCallback() {
 
+
+
+
+
+
+        @Override
+        public void onMapReady(GoogleMap googleMap) {
+            mMap = googleMap;
+
+            getCurrentLocation();
+            getNearbyLocation();
+//            LatLng sydney = new LatLng(-34, 151);
+//            mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+//            mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        }
+
+
+
+    };
+
+    private void getNearbyLocation() {
+
+        StringBuilder stringBuilder=new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json");
+        stringBuilder.append("location="+lat+","+lnt);
+        stringBuilder.append("&radius=1000");
+        stringBuilder.append("&type=hospital");
+        stringBuilder.append("&sensor=true");
+        stringBuilder.append("key="+getResources().getString(R.string.google_maps_key));
+        String url=stringBuilder.toString();
+        Object dataFetch[]=new Object[2];
+        dataFetch[0]=mMap;
+        dataFetch[1]=url;
+        FetchData fetchData=new FetchData();
+        fetchData.execute(dataFetch);
+
+
+
+
+    }
+
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_user_nearby_hospitals, container, false);
-
-        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
-
-        hospitals.add(new Hospital("Mayo Hospital", new LatLng(31.5391, 74.3232)));
-        hospitals.add(new Hospital("Jinnah Hospital", new LatLng(31.4788, 74.3057)));
-        hospitals.add(new Hospital("Shaukat Khanum Memorial Cancer Hospital", new LatLng(31.5831, 74.3576)));
-
-        return rootView;
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        binding = FragmentUserNearbyHospitalsBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
+        return view;
     }
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
+                .findFragmentById(R.id.map);
 
-        // Check location permission
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(requireContext(),
-                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // Request the permission
-            ActivityCompat.requestPermissions(requireActivity(),
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
-                    101);
+        if (mapFragment != null) {
+            mapFragment.getMapAsync(callback);
+        }
+
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext());
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
+
+
+    private void getCurrentLocation() {
+        if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // Permission is not granted, request it
+            ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
             return;
         }
 
-        // Get user's current location
-        locationManager = (LocationManager) requireActivity().getSystemService(Context.LOCATION_SERVICE);
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME, MIN_DISTANCE, this);
+        LocationRequest locationRequest = LocationRequest.create();
+        locationRequest.setInterval(6000);
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        locationRequest.setFastestInterval(5000);
 
-        // Create custom marker icon for user's current location
-        BitmapDescriptor userMarkerIcon = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE);
-        userMarkerOptions = new MarkerOptions().icon(userMarkerIcon).title("Your location");
-    }
+        LocationCallback locationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(@NonNull LocationResult locationResult) {
+                if (locationResult == null || locationResult.getLocations().isEmpty()) {
+                    if (getContext() != null) {
+                        Toast.makeText(getContext(), "Location result is not available", Toast.LENGTH_SHORT).show();
+                    }
+                    return;
+                }
 
-    @Override
-    public void onLocationChanged(Location location) {
-        // Remove previous markers
-        mMap.clear();
+                for (Location location : locationResult.getLocations()) {
+                    if (location != null) {
+                        //Toast.makeText(getActivity(), "Location result is: " + location, Toast.LENGTH_SHORT).show();
 
-        // Add a marker for user's current location
-        LatLng currentLoc = new LatLng(location.getLatitude(), location.getLongitude());
-        mMap.addMarker(userMarkerOptions.position(currentLoc));
-
-        // Add markers for nearby hospitals
-        // Add markers for nearby hospitals
-        for (Hospital hospital : hospitals) {
-            float[] results = new float[3];
-            Location.distanceBetween(location.getLatitude(), location.getLongitude(),
-                    hospital.getLocation().latitude, hospital.getLocation().longitude, results);
-            float distance = results[0];
-            if (distance <= MAX_DISTANCE) {
-                LatLng hospitalLoc = new LatLng(hospital.getLocation().latitude, hospital.getLocation().longitude);
-                mMap.addMarker(new MarkerOptions().position(hospitalLoc).title(hospital.getName()));
+                        // Set marker and move camera only if location is not null
+                        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                        mMap.addMarker(new MarkerOptions().position(latLng).title("Current Location"));
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+                    }
+                }
             }
+        };
+
+
+        fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, null);
+        Task<Location> task = fusedLocationProviderClient.getLastLocation();
+        task.addOnSuccessListener(new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                if (location != null) {
+                    lat = location.getLatitude();
+                    lnt = location.getLongitude();
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CODE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    getCurrentLocation();
+                }
+                break;
         }
-
-        // Move camera to user's current location
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLoc, 12.0f));
-    }
-
-    @Override
-    public void onProviderEnabled(String provider) {
-        // Do nothing
-    }
-
-    @Override
-    public void onProviderDisabled(String provider) {
-        // Do nothing
-    }
-
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-        // Do nothing
     }
 }
-

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_margin="@dimen/_8sdp"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/pharmacyName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:text="Clinix Pharmacy"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_13sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/onlineIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8sdp"
+
+        android:layout_margin="@dimen/_5sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/online_dot" />
+
+    <TextView
+        android:id="@+id/statusAvail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Available"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_2sdp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toStartOf="@+id/onlineIcon"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/pharmacyLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lahore Pakistan"
+        android:layout_marginStart="@dimen/_8sdp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pharmacyName" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnOrderNow"
+        android:layout_width="@dimen/_60sdp"
+        android:layout_height="@dimen/_25sdp"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/_5sdp"
+        android:background="@drawable/button_bg_order"
+        android:gravity="center"
+        android:minHeight="48dp"
+        android:text="Order Now"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/_10sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/statusAvail" />
+
+    <me.zhanghai.android.materialratingbar.MaterialRatingBar
+        android:id="@+id/materialRatingBar"
+        style="@style/Widget.MaterialRatingBar.RatingBar"
+        android:layout_width="@dimen/_80sdp"
+        android:layout_marginStart="@dimen/_8sdp"
+        app:mrb_fillBackgroundStars="true"
+        android:progressBackgroundTint="@color/primary_colori"
+        android:layout_height="@dimen/_18sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pharmacyLocation" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -74,8 +74,8 @@ TextView tvloginShopeg;
         binding.etlocationShop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ShopResgister.this, MapsActivity.class);
-                startActivityForResult(intent, MAP_REQUEST_CODE);
+               // Intent intent = new Intent(ShopResgister.this, MapsActivity.class);
+               // startActivityForResult(intent, MAP_REQUEST_CODE);
             }
         });
 
