@@ -1,25 +1,19 @@
 package com.example.mediworld;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.example.mediworld.databinding.FragmentUserForgetPasswordAddPhoneBinding;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 
-import java.util.concurrent.TimeUnit;
-
 public class UserForgetPasswordAddPhone extends Fragment {
-
+    private NavController navController;
     private FragmentUserForgetPasswordAddPhoneBinding binding;
     private static final int MY_PERMISSIONS_REQUEST_SEND_SMS = 1;
     private String mVerificationId;
@@ -58,17 +52,15 @@ public class UserForgetPasswordAddPhone extends Fragment {
                              Bundle savedInstanceState) {
         // Initialize ViewBinding object
         binding = FragmentUserForgetPasswordAddPhoneBinding.inflate(inflater, container, false);
+        navController = Navigation.findNavController(requireActivity(), R.id.fragmentContainerViewforgetpass);
+
         binding.btnuseraddPhoneforgetpass.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.SEND_SMS)
-                                != PackageManager.PERMISSION_GRANTED) {
-                            ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.SEND_SMS},
-                                    MY_PERMISSIONS_REQUEST_SEND_SMS);
-                        } else {
-                            sendOTP(binding.etuseraddPhoneforgetpass.getText().toString());
-                        }
+                        navController.navigate(R.id.action_userForgetPasswordAddPhone_to_userForgetPasswordAddOtp);
+
+
                     }
                 }
         );
@@ -85,23 +77,6 @@ public class UserForgetPasswordAddPhone extends Fragment {
     }
 
     // This method sends an OTP to the given phone number and navigates to the next fragment to verify it
-    private void sendOTP(String phoneNumber) {
-        // Verify that the phone number matches the pattern for a Pakistani phone number
-        if (!phoneNumber.matches("^03\\d{9}$")) {
-            // Phone number is not valid for Pakistan
-            return;
-        }
 
-        // Configure the SMS verification settings
-        PhoneAuthOptions options =
-                PhoneAuthOptions.newBuilder(FirebaseAuth.getInstance())
-                        .setPhoneNumber(phoneNumber)  // Phone number to verify
-                        .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
-                        .setActivity(requireActivity()) // Activity (for callback binding)
-                        .setCallbacks(callbacks) // OnVerificationStateChangedCallbacks
-                        .build();
-
-        // Start the phone number verification process
-        PhoneAuthProvider.verifyPhoneNumber(options);
     }
-}
+

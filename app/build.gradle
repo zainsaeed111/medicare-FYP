@@ -85,6 +85,9 @@ dependencies {
     implementation 'com.google.android.libraries.places:places:2.4.0'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'me.zhanghai.android.materialratingbar:library:1.4.0'
+    implementation 'com.squareup.picasso:picasso:2.8'
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.google.firebase:firebase-storage:20.0.0'
 
 
 

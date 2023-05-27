@@ -1,17 +1,26 @@
 package com.example.mediworld.Models;
 
 public class OnlinePharmaciesModel {
-
+    private String regNo;
     private String shopName;
-    private String shopLocation;
+    private String location;
 
     public OnlinePharmaciesModel() {
         // Required default constructor
     }
 
-    public OnlinePharmaciesModel(String shopName, String location) {
+    public OnlinePharmaciesModel(String regNo, String shopName, String location) {
+        this.regNo = regNo;
         this.shopName = shopName;
-        this.shopLocation = location;
+        this.location = location;
+    }
+
+    public String getRegNo() {
+        return regNo;
+    }
+
+    public void setRegNo(String regNo) {
+        this.regNo = regNo;
     }
 
     public String getShopName() {
@@ -23,10 +32,10 @@ public class OnlinePharmaciesModel {
     }
 
     public String getLocation() {
-        return shopLocation;
+        return location;
     }
 
     public void setLocation(String location) {
-        this.shopLocation = location;
+        this.location = location;
     }
 }

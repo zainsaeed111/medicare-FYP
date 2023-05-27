@@ -1,6 +1,5 @@
 package com.example.mediworld;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,7 +39,7 @@ public class home extends Fragment {
        orderMedicinebox=getView().findViewById(R.id.orderMedicinebox);
         emgNumBox=getView().findViewById(R.id.emgNumBox);
         aimedicineBox=getView().findViewById(R.id.aimedicineBox);
-        nearbyHospitalBox=getView().findViewById(R.id.nearbyHospitalBox);
+        nearbyHospitalBox=getView().findViewById(R.id.nearbyHospitalsBox);
         onlinePharmaciesBox=getView().findViewById(R.id.onlinePharmaciesBox);
 
         sliderView=getView().findViewById(R.id.image_slider);
@@ -64,8 +63,13 @@ public class home extends Fragment {
         orderMedicinebox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),OrderNow_Shop.class);
-                startActivity(intent);
+                /*Intent intent = new Intent(getActivity(),OrderNow_Shop.class);
+                startActivity(intent);*/
+                NavController navController = Navigation.findNavController(v);
+
+                  navController.navigate(R.id.action_userHome_to_userOrderMedicine);
+
+
 
             }
         });
@@ -78,7 +82,7 @@ public class home extends Fragment {
                 NavController navController = Navigation.findNavController(view);
 
 // Navigate to the destination fragment
-                navController.navigate(R.id.userAIMedicalAssitant);
+                navController.navigate(R.id.action_userHome_to_userAIMedicalAssitant);
             }
         });
 
@@ -99,7 +103,7 @@ public class home extends Fragment {
                 NavController navController = Navigation.findNavController(view);
 
 // Navigate to the destination fragment
-                navController.navigate(R.id.userNearbyHospitals);
+                navController.navigate(R.id.action_userHome_to_userNearbyHospitals2);
             }
         });
 

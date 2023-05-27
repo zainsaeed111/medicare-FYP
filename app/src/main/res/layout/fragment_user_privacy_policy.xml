@@ -18,6 +18,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="@dimen/_10sdp"
+
             android:orientation="vertical">
 
             <TextView
@@ -27,7 +29,7 @@
                 android:text="Privacy Policy"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                android:padding="16dp"/>
+                />
 
             <TextView
                 android:id="@+id/introduction"
@@ -35,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:text="We are committed to protecting your privacy. This Privacy Policy explains how we collect, use, and share information from you when you use our Medicine Delivery App. By using our App, you agree to the collection and use of information in accordance with this Privacy Policy."
                 android:textSize="16sp"
-                android:padding="16dp"/>
+                />
 
             <TextView
                 android:id="@+id/information_we_collect"
@@ -44,7 +46,7 @@
                 android:text="Information We Collect"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:padding="16dp"/>
+        />
 
             <TextView
                 android:id="@+id/information_we_collect_description"
@@ -52,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:text="When you use our Medicine Delivery App, we may collect certain information from you, including your name, address, phone number, email address, prescription information, and payment information. We may also collect information about your device, including your device type, operating system, and mobile network information. We collect this information to provide you with our services and to improve our App. We do not share your information with third parties, except as necessary to provide you with our services or as required by law."
                 android:textSize="16sp"
-                android:padding="16dp"/>
+                />
 
             <TextView
                 android:id="@+id/how_we_use_your_information"
@@ -61,7 +63,7 @@
                 android:text="How We Use Your Information"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:padding="16dp"/>
+               />
 
             <TextView
                 android:id="@+id/how_we_use_your_information_description"
@@ -69,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:text="We use the information we collect from you to provide you with our Medicine Delivery App services, to communicate with you, and to improve our App. We may also use your information to send you marketing communications about our products and services, unless you opt-out. We do not share your information with third parties for their marketing purposes without your consent."
                 android:textSize="16sp"
-                android:padding="16dp"/>
+               />
 
         </LinearLayout>
 

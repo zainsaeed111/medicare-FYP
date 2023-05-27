@@ -41,7 +41,16 @@
                 android:layout_alignParentRight="true"
                 android:src="@drawable/gig_login_shop" />
         </RelativeLayout>
-
+        <com.google.android.material.textfield.TextInputLayout
+            android:background="@color/white"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            app:passwordToggleTint="@color/grey"
+            app:passwordToggleEnabled="true"
+            app:hintEnabled="false"
+            android:layout_marginBottom="5dp"
+            app:hintAnimationEnabled="false"
+            app:boxBackgroundMode="none">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etregnoshopLogin"
             android:layout_width="match_parent"
@@ -55,7 +64,7 @@
             android:padding="12.5dp"
             android:textColor="@color/grey"
             android:textColorHint="@color/grey" />
-
+        </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
             android:background="@color/white"
             android:layout_height="wrap_content"
@@ -82,7 +91,7 @@
 
         </com.google.android.material.textfield.TextInputLayout>
         <TextView
-
+            android:id="@+id/tvforgetpassShop"
             style="@style/viewParent"
             android:layout_gravity="end"
             android:text="Forgot Password?"

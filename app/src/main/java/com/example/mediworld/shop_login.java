@@ -1,5 +1,6 @@
 package com.example.mediworld;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -20,13 +21,26 @@ import com.google.firebase.database.ValueEventListener;
 
 public class shop_login extends AppCompatActivity {
     private ActivityShopLoginBinding binding;
-
+    private static final String PREF_NAME = "MyPreferences";
+    private static final String KEY_VALUE = "myValue";
+    private static final String PREF_Shop_KEY = "Shop_KEY";
+    private static final String Shop_KEY = "shopKey";
+    private static final String PREF_Shop_KEY_New = "Shop_KEY_New";
+    private static final String Shop_KEY_New = "newshopKey";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityShopLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         getSupportActionBar().hide();
+        binding.tvforgetpassShop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), UserForgetPasswordHost.class);
+                startActivity(intent);
+
+            }
+        });
 
         binding.newShoptv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,16 +51,15 @@ public class shop_login extends AppCompatActivity {
             }
         });
 
-    binding.shopLoginBtn.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            if (validateForm()){
-                loginShop();
+        binding.shopLoginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (validateForm()) {
+                    loginShop();
+                }
             }
-        }
-    });
+        });
     }
-
 
 
     public void onLoginClick(View view) {
@@ -115,14 +128,30 @@ public class shop_login extends AppCompatActivity {
                         String checkPass = childSnapshot.child("password").getValue(String.class);
                         if (checkPass != null && checkPass.equals(password)) {
                             binding.etpassShopLog.setError(null);
-
+                            String ShopKey = childSnapshot.child("regNo").getValue(String.class);
                             // Generate a key for the user
                             String key = databaseReference.push().getKey();
+                            // Shop found and password matched, store the shop key in SharedPreferences
+                            //storeShopKeyNew(childSnapshot.getKey());
+                            String shopKeyunique= childSnapshot.getKey();
+                            Log.d("shopKeyunique",shopKeyunique);
+                            storeShopKeyNew(getApplicationContext(), "Shop");
+                            Log.d("userkey",shopKeyunique);
+                            String ShopKeyNew= childSnapshot.getKey();
+                            storeShopKeyNew(getApplicationContext(), ShopKeyNew);
+                            Log.d("ShopKeyNew", ShopKeyNew);
 
-                            // Store the key in SharedPreferences
-                            SharedPreferences preferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
-                            preferences.edit().putString("shopKey", childSnapshot.getKey()).apply();
-                            // If the password is correct, start the ShopHost activity
+//                            // Store the key in SharedPreferences
+//                            SharedPreferences preferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+//                            preferences.edit().putString("shopKey", childSnapshot.getKey()).apply();
+//                            // If the password is correct, start the ShopHost activity
+//                            Log.d("shopKey", ShopKey);
+                            //implement shared preference
+                            storeValue(getApplicationContext(), "Shop");
+                            storeShopKey(getApplicationContext(), ShopKey);
+//                            storeShopKeyNew(childSnapshot.getKey());
+//                            Log.d("storeShopKeyNew", childSnapshot.toString());
+
                             Intent intent = new Intent(getApplicationContext(), ShopHost.class);
                             startActivity(intent);
                             finish();
@@ -146,6 +175,24 @@ public class shop_login extends AppCompatActivity {
         });
     }
 
+    private static void storeValue(Context context, String value) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(KEY_VALUE, value);
+        editor.apply();
+    }
 
+    private static void storeShopKey(Context context, String value) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_Shop_KEY, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(Shop_KEY, value);
+        editor.apply();
+    }
+    private void storeShopKeyNew(Context context, String value) {
+        SharedPreferences sharedPreferences = getSharedPreferences(PREF_Shop_KEY_New, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(Shop_KEY_New, value);
+        editor.apply();
+    }
 
 }

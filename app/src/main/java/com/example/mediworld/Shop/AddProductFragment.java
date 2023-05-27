@@ -1,10 +1,8 @@
 package com.example.mediworld.Shop;
 
 import static android.app.Activity.RESULT_OK;
-import static android.content.Context.MODE_PRIVATE;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -22,10 +20,11 @@ import com.bumptech.glide.Glide;
 import com.example.mediworld.databinding.FragmentAddProductBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.skydoves.powerspinner.PowerSpinnerView;
 
 public class AddProductFragment extends Fragment {
@@ -64,7 +63,7 @@ public class AddProductFragment extends Fragment {
                         imageUriString = imageUri.toString();
                     }
                     // Add the product to the database
-                    addProductToDatabase(categorySpinner,
+                    addProductToDatabase(String.valueOf(categorySpinner),
                             productName,
                             productDescription,
                             company,
@@ -119,7 +118,7 @@ public class AddProductFragment extends Fragment {
 
 
 
-}
+    }
 
     @Override
     public void onDestroyView() {
@@ -205,12 +204,13 @@ public class AddProductFragment extends Fragment {
         return true;
     }
 
+/*
     private void addProductToDatabase(PowerSpinnerView category, String productName, String productDescription, String company, int price, String discount, int discountedPrice, String imageUrl) {
         // Get a reference to the Firebase Realtime Database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myShopRef = database.getReference("MyShop");
 
-        /// Check if the user is logged in and retrieve the loggedInShopKey from shared preferences
+        // Check if the user is logged in and retrieve the loggedInShopKey from shared preferences
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("MyPrefs", MODE_PRIVATE);
@@ -220,9 +220,6 @@ public class AddProductFragment extends Fragment {
             Toast.makeText(getActivity(), "Shop key not found", Toast.LENGTH_SHORT).show();
             return;
         }
-
-// Call the addProductToDatabase function with the retrieved values
-//        addProductToDatabase(category, productName, productDescription, company, price, discount, discountedPrice, imageUrl);
 
         // Check for empty or null values for mandatory fields
         if (TextUtils.isEmpty(category.getText())) {
@@ -265,6 +262,47 @@ public class AddProductFragment extends Fragment {
                         // Failed to add product
                         Toast.makeText(getActivity(), "Failed to add product: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
-                });}
+                });
     }
+*/
+private void addProductToDatabase(String category, String productName, String productDescription, String company, int price, String discount, int discountedPrice, String imageUrl) {
+    // Get a reference to the Firebase Realtime Database
+    DatabaseReference myShopRef = FirebaseDatabase.getInstance().getReference().child("MyShop");
 
+    // Create a Product object with the given details
+    Product product = new Product(category, productName, productDescription, company, price, discount, discountedPrice, imageUrl);
+
+    // Generate a unique key for the product and add it to the "products" node under each shop's key
+    myShopRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            for (DataSnapshot shopSnapshot : dataSnapshot.getChildren()) {
+                String shopKey = shopSnapshot.getKey();
+                String productId = myShopRef.child(shopKey).child("products").push().getKey();
+                myShopRef.child(shopKey).child("products").child(productId).setValue(product)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                // Product added successfully
+                                Toast.makeText(getActivity(), "Product added successfully", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                // Failed to add product
+                                Toast.makeText(getActivity(), "Failed to add product: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError databaseError) {
+            // Handle database error
+            Toast.makeText(getActivity(), "Database error: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    });
+}
+
+}

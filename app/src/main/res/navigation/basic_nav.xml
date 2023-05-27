@@ -16,17 +16,21 @@
         <action
             android:id="@+id/action_userHome_to_userEmgno"
             app:destination="@id/userEmgno" />
+        <action
+            android:id="@+id/action_userHome_to_userOrderMedicine"
+            app:destination="@id/userOrderMedicine" />
+        <action
+            android:id="@+id/action_userHome_to_userNearbyHospitals2"
+            app:destination="@id/userNearbyHospitals" />
+        <action
+            android:id="@+id/action_userHome_to_userAIMedicalAssitant"
+            app:destination="@id/userAIMedicalAssitant" />
     </fragment>
     <fragment
         android:id="@+id/userInbox"
-        android:name="com.example.mediworld.chat"
+        android:name="com.example.mediworld.Inbox"
         android:label="fragment_chat"
-        tools:layout="@layout/fragment_chat" />
-    <fragment
-        android:id="@+id/userProfile"
-        android:name="com.example.mediworld.profile"
-        android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_inbox" />
     <fragment
         android:id="@+id/userAbout"
         android:name="com.example.mediworld.about"
@@ -51,7 +55,14 @@
         android:id="@+id/userOnlinephar"
         android:name="com.example.mediworld.OnlinePharmacies"
         android:label="fragment_online_pharmacies"
-        tools:layout="@layout/fragment_online_pharmacies" />
+        tools:layout="@layout/fragment_online_pharmacies" >
+        <action
+            android:id="@+id/action_userOnlinephar_to_viewPharmciesItems"
+            app:destination="@id/viewPharmciesItems" />
+        <action
+            android:id="@+id/action_userOnlinephar_to_chatFragment"
+            app:destination="@id/chatFragment" />
+    </fragment>
     <fragment
         android:id="@+id/userPrivacyPolicy"
         android:name="com.example.mediworld.UserPrivacyPolicy"
@@ -62,4 +73,53 @@
         android:name="com.example.mediworld.ContactUs"
         android:label="fragment_contact_us"
         tools:layout="@layout/fragment_contact_us" />
+    <fragment
+        android:id="@+id/viewPharmciesItems"
+        android:name="com.example.mediworld.ViewPharmciesItems"
+        android:label="fragment_view_pharmcies_items"
+        tools:layout="@layout/fragment_view_pharmcies_items" />
+    <fragment
+        android:id="@+id/userOrderMedicine"
+        android:name="com.example.mediworld.UserOrderMedicine"
+        android:label="fragment_user_order_medicine"
+        tools:layout="@layout/fragment_user_order_medicine" >
+        <action
+            android:id="@+id/action_userOrderMedicine_to_userOrderFromPrescription"
+            app:destination="@id/userOrderFromPrescription" />
+        <action
+            android:id="@+id/action_userOrderMedicine_to_userOnlinephar"
+            app:destination="@id/userOnlinephar" />
+    </fragment>
+    <fragment
+        android:id="@+id/userOrderFromPrescription"
+        android:name="com.example.mediworld.UserOrderFromPrescription"
+        android:label="fragment_user_order_from_prescription"
+        tools:layout="@layout/fragment_user_order_from_prescription" />
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.example.mediworld.ChatFragment"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chat" />
+    <fragment
+        android:id="@+id/userprofile"
+        android:name="com.example.mediworld.Profile"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_userprofile_to_updatePersonalInfo"
+            app:destination="@id/updatePersonalInfo" />
+        <action
+            android:id="@+id/action_userprofile_to_updateUserPassword"
+            app:destination="@id/updateUserPassword" />
+    </fragment>
+    <fragment
+        android:id="@+id/updatePersonalInfo"
+        android:name="com.example.mediworld.UpdatePersonalInfo"
+        android:label="fragment_update_personal_info"
+        tools:layout="@layout/fragment_update_personal_info" />
+    <fragment
+        android:id="@+id/updateUserPassword"
+        android:name="com.example.mediworld.UpdateUserPassword"
+        android:label="fragment_update_user_password"
+        tools:layout="@layout/fragment_update_user_password" />
 </navigation>

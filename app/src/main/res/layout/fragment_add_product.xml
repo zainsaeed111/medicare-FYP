@@ -6,23 +6,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Shop.AddProductFragment">
 
-    <include
-        android:id="@+id/include"
-        layout="@layout/shop_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginBottom="@dimen/_30sdp"
-        app:layout_constraintTop_toBottomOf="@id/include">
+        app:layout_constraintTop_toTopOf="parent">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -86,10 +76,10 @@
                         android:background="@drawable/custom_edittext"
                         android:drawablePadding="10dp"
                         android:inputType="text"
-                        android:textSize="@dimen/_12sdp"
                         android:maxLines="1"
                         android:padding="15dp"
-                        android:textColor="@color/black">
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sdp">
 
                     </com.google.android.material.textfield.TextInputEditText>
 
@@ -102,7 +92,6 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etaddproductDescription"
-                        android:textSize="@dimen/_12sdp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="20dp"
@@ -111,7 +100,8 @@
                         android:inputType="text"
                         android:maxLines="1"
                         android:padding="15dp"
-                        android:textColor="@color/black">
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sdp">
 
                     </com.google.android.material.textfield.TextInputEditText>
 
@@ -124,7 +114,6 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etaddproductCompany"
-                        android:textSize="@dimen/_12sdp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="20dp"
@@ -133,7 +122,8 @@
                         android:inputType="text"
                         android:maxLines="1"
                         android:padding="15dp"
-                        android:textColor="@color/black">
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sdp">
 
                     </com.google.android.material.textfield.TextInputEditText>
 
@@ -172,10 +162,10 @@
                         android:background="@drawable/custom_edittext"
                         android:drawablePadding="10dp"
                         android:inputType="text"
-                        android:textSize="@dimen/_12sdp"
                         android:maxLines="1"
                         android:padding="15dp"
-                        android:textColor="@color/black"></com.google.android.material.textfield.TextInputEditText>
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sdp"></com.google.android.material.textfield.TextInputEditText>
 
                     <TextView
                         android:layout_width="match_parent"
@@ -232,8 +222,6 @@
                     </LinearLayout>
 
 
-
-
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/saveProduct"
                         android:layout_width="match_parent"
@@ -248,12 +236,13 @@
 
 
                     </androidx.appcompat.widget.AppCompatButton>
+
                     <RelativeLayout
                         android:id="@+id/alreadyaddProductlayout"
                         android:layout_width="@dimen/_120sdp"
                         android:layout_height="@dimen/_120sdp"
-                        android:visibility="gone"
-                        android:padding="16dp">
+                        android:padding="16dp"
+                        android:visibility="gone">
 
                         <ImageView
                             android:id="@+id/selectedImg"
@@ -265,11 +254,11 @@
                             android:id="@+id/remove_icon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/baseline_remove_circle_24"
+                            android:layout_alignTop="@id/selectedImg"
+                            android:layout_alignEnd="@id/selectedImg"
                             android:layout_marginTop="-2dp"
                             android:layout_marginEnd="-2dp"
-                            android:layout_alignTop="@id/selectedImg"
-                            android:layout_alignEnd="@id/selectedImg" />
+                            android:src="@drawable/baseline_remove_circle_24" />
 
                     </RelativeLayout>
 

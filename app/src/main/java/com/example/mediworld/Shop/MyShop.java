@@ -1,66 +1,120 @@
 package com.example.mediworld.Shop;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.mediworld.R;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link MyShop#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.example.mediworld.R;
+import com.example.mediworld.databinding.FragmentMyShopBinding;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 public class MyShop extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private FragmentMyShopBinding binding;
+    private DatabaseReference databaseReference;
+    private static final String PREF_Shop_KEY = "Shop_KEY";
+    private static final String Shop_KEY = "shopKey";
+    private static final String PREF_Shop_KEY_New = "Shop_KEY_New";
+    private static final String Shop_KEY_New = "newshopKey";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public MyShop() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MyShop.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MyShop newInstance(String param1, String param2) {
-        MyShop fragment = new MyShop();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+    }
+
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        binding = FragmentMyShopBinding.bind(view);
+
+        String loginUShopKey = retrieveShopKey(requireContext());
+        Log.d("LoginUShopKey", loginUShopKey); // Check the value of loginUShopKey
+
+        ValueEventListener valueEventListener = new ValueEventListener() {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                    String userKey = userSnapshot.getKey();
+                    Log.d("UserKey", userKey); // Check the value of userKey
+                    if (userKey.equals(loginUShopKey)) {
+                        String shopName = userSnapshot.child("shopName").getValue(String.class);
+                        String regNo = userSnapshot.child("regNo").getValue(String.class);
+                        String phone = userSnapshot.child("phone").getValue(String.class);
+                        String location = userSnapshot.child("location").getValue(String.class);
+
+                        binding.tvshopnameMyshop.setText(shopName);
+                        binding.tvregnoMyshop.setText(regNo);
+                        binding.tvphoneMyshop.setText(phone);
+                        binding.tvshopnametitleMyshop.setText(shopName);
+                        binding.tvshoplocationMyshop.setText(location);
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Handle potential errors here
+            }
+        };
+
+        databaseReference.child("MyShop").addListenerForSingleValueEvent(valueEventListener);
+
+
+
+        binding.iconeditBusinessinfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Get the current values from the TextViews
+                String shopName = binding.tvshopnameMyshop.getText().toString();
+                String regNo = binding.tvregnoMyshop.getText().toString();
+                String phone = binding.tvphoneMyshop.getText().toString();
+                String location = binding.tvshoplocationMyshop.getText().toString();
+
+
+                Bundle bundle = new Bundle();
+                bundle.putString("shopKey", loginUShopKey);
+                bundle.putString("shopName", shopName);
+                bundle.putString("regNo", regNo);
+                bundle.putString("phone", phone);
+                bundle.putString("location", location);
+
+                Navigation.findNavController(view).navigate(R.id.action_bnmyShop_to_updateBusinessInfo, bundle);
+            }
+        });
+
+        binding.iconchnagepassMyShop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("shopKey", loginUShopKey);
+                Navigation.findNavController(view).navigate(R.id.action_bnmyShop_to_updateShopPassword, bundle);
+
+            }
+        });
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_shop, container, false);
+        binding = FragmentMyShopBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
+
+
+    private static String retrieveShopKey(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_Shop_KEY_New, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(Shop_KEY_New, "");
+    }
+
 }

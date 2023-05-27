@@ -9,14 +9,13 @@
     android:layout_height="wrap_content">
 
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/_10sdp">
 
 
-<!--
+        <!--
         <ImageView
             android:id="@+id/inboxProfileImg"
             android:layout_width="wrap_content"
@@ -41,7 +40,7 @@
 
 
             <TextView
-                android:id="@+id/tvinobxName"
+                android:id="@+id/tvname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Joanne"
@@ -52,7 +51,7 @@
 
 
             <TextView
-                android:id="@+id/tvInobxMessage"
+                android:id="@+id/tvmessage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Hi Alvin, how’s work progress going?..."
@@ -64,17 +63,17 @@
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/clNotificationImg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/_8sdp"
             android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvInboxTime"
+            app:layout_constraintTop_toBottomOf="@+id/tvUserinboxtime"
             app:srcCompat="@drawable/chat_notification_icon" />
 
         <TextView
-            android:id="@+id/tvInboxTime"
+            android:id="@+id/tvUserinboxtime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -84,14 +83,13 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:visibility="gone"
             android:id="@+id/imageView4"
             android:layout_width="@dimen/_300sdp"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2"
             app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/chat_row_divider_line" />
 

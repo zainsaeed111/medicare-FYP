@@ -9,11 +9,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.basgeekball.awesomevalidation.utility.RegexTemplate;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -129,20 +132,47 @@ tvloginUsereg.setOnClickListener(new View.OnClickListener() {
     private void submitForm() {
         // Validate the form...
         if (awesomeValidation.validate()) {
-            // Here, we are sure that form is successfully validated. So, do your stuffs now...
-            firebaseDatabase = FirebaseDatabase.getInstance();
-            reference =firebaseDatabase.getReference("MyUser");
-            etusernameUsereg = findViewById(R.id.etusernameUsereg);
+            // Here, we are sure that the form is successfully validated. So, proceed with registration.
             String username = etusernameUsereg.getText().toString();
             String useremail = etemailUsereg.getText().toString();
             String userphone = etphoneUsereg.getText().toString();
             String userpass = etpassUsereg.getText().toString().trim();
             String userconfirmPass = etpassconfirmUsereg.getText().toString().trim();
-            UserHelperClass helperClass = new UserHelperClass(username, useremail, userphone,userpass);
-            reference.child(username).setValue(helperClass);
-            Toast.makeText(this, "Registered Successfulyy", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(user_register_activity.this, user_login_activity.class);
-            startActivity(intent);
+
+            if (!userpass.equals(userconfirmPass)) {
+                // Password and confirm password don't match
+                Toast.makeText(this, "Passwords do not match", Toast.LENGTH_LONG).show();
+                return;
+            }
+
+            // Create a Firebase instance and reference
+            FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+            DatabaseReference reference = firebaseDatabase.getReference("MyUser");
+
+            // Generate a unique key for the user
+            String uniqueKey = reference.push().getKey();
+
+            // Create a UserHelperClass instance with the user data
+            UserHelperClass helperClass = new UserHelperClass(username, useremail, userpass, userphone);
+
+            // Store the user data in Firebase
+            reference.child(uniqueKey).setValue(helperClass)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            // Data is successfully inserted into Firebase
+                            Toast.makeText(user_register_activity.this, "Registered Successfully", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(user_register_activity.this, user_login_activity.class);
+                            startActivity(intent);
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            // Failed to insert data into Firebase
+                            Toast.makeText(user_register_activity.this, "Registration Failed", Toast.LENGTH_LONG).show();
+                        }
+                    });
         }
     }
 
@@ -171,29 +201,7 @@ tvloginUsereg.setOnClickListener(new View.OnClickListener() {
 
         }
 
-/*
-    private void registerUser() {
-        String username = etusernameUsereg.getText().toString().trim();
-        String email = etemailUsereg.getText().toString().trim();
-        String password = etpassUsereg.getText().toString().trim();
-        String confirmpass= etpassconfirmUsereg.getText().toString().trim();
-        String phone = etphoneUsereg.getText().toString().trim();
 
-
-        if (!username.isEmpty()) {
-            etusernameUsereg.setError(null);
-            etusernameUsereg.setErrorEnabled(false);
-
-        }
-        else
-            {etusernameUsereg.setError("Enter Username Please*"); }
-        if(!email.isEmpty()){ } else{etemailUsereg.setError("Enter Email Please*"); }
-        if(!password.isEmpty()){ } else{ etpassUsereg.setError("Enter Password Please*"); }
-        if(!confirmpass.isEmpty()){ } else{etpassconfirmUsereg.setError("Confirm Password Please*"); }
-        if(!phone.isEmpty()){ } else{etphoneUsereg.setError("Enter Email Please*"); }
-
-    }
-*/
 
 
 

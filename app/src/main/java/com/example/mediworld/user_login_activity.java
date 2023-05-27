@@ -1,7 +1,10 @@
 package com.example.mediworld;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,12 +27,15 @@ public class user_login_activity extends AppCompatActivity {
     TextView tvRegisterUselog;
     TextView tvforgetPassword;
 
-    Button userLoginbtn,btnuserLoginGoogle;
-    EditText etpassUserLog, etemailUserLog,etusernameUserLog,   etuseremailUserLog;
+    Button userLoginbtn, btnuserLoginGoogle;
+    EditText etpassUserLog, etemailUserLog, etusernameUserLog, etuseremailUserLog;
     FirebaseAuth mAuth;
-   /* String loginphone, loginpassword;*/
+    /* String loginphone, loginpassword;*/
     GoogleSignInClient googleSignInClient;
-
+    private static final String PREF_NAME = "MyPreferences";
+    private static final String PREF_USER_KEY = "USER_KEY";
+    private static final String USER_KEY = "userKey";
+    private static final String KEY_VALUE = "myValue";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,45 +43,39 @@ public class user_login_activity extends AppCompatActivity {
         setContentView(R.layout.activity_user_login);
         getSupportActionBar().hide();
 
-     //   btnuserLoginGoogle=findViewById(R.id.btnuserLoginGoogle);
+        //   btnuserLoginGoogle=findViewById(R.id.btnuserLoginGoogle);
         userLoginbtn = findViewById(R.id.userLoginBtn);
         tvRegisterUselog = findViewById(R.id.tvRegisterUselog);
         etpassUserLog = findViewById(R.id.etpassUserLog);
-       etusernameUserLog= findViewById(R.id.etusernameUserLog);
-        tvforgetPassword=findViewById(R.id.tvforgetPassword);
-      //  etuseremailUserLog= findViewById(R.id.etuseremailUserLog);
+        etusernameUserLog = findViewById(R.id.etusernameUserLog);
+        tvforgetPassword = findViewById(R.id.tvforgetPassword);
+        //  etuseremailUserLog= findViewById(R.id.etuseremailUserLog);
 
         mAuth = FirebaseAuth.getInstance();
-tvforgetPassword.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        Intent intent = new Intent(getApplicationContext(), UserForgetPasswordHost.class);
-        startActivity(intent);
+        tvforgetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), UserForgetPasswordHost.class);
+                startActivity(intent);
 
-    }
-});
+            }
+        });
 
         userLoginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (!validateUsername() | !validatePassword()){
-
-                } else {
+//                if (!validateUsername() | !validatePassword()) {
+//
+//                } else {
                     LoginUser();
-                }
+//                }
             }
 
 
             /*    startActivity(new Intent(getApplicationContext(),custom_bottom_menu.class));*/
 
         });
-
-
-
-
-
-
 
 
         tvRegisterUselog.setOnClickListener(new View.OnClickListener() {
@@ -89,6 +89,7 @@ tvforgetPassword.setOnClickListener(new View.OnClickListener() {
 
 
     }
+
     @Override
     protected void onStop() {
         super.onStop();
@@ -98,7 +99,7 @@ tvforgetPassword.setOnClickListener(new View.OnClickListener() {
     private boolean validatePassword() {
 
         String val = etpassUserLog.getText().toString();
-        if (val.isEmpty()){
+        if (val.isEmpty()) {
             etpassUserLog.setError("Password cannot be empty");
             return false;
         } else {
@@ -107,14 +108,12 @@ tvforgetPassword.setOnClickListener(new View.OnClickListener() {
         }
 
 
-
-
     }
 
     private boolean validateUsername() {
 
         String val = etusernameUserLog.getText().toString();
-        if (val.isEmpty()){
+        if (val.isEmpty()) {
             etusernameUserLog.setError("Username cannot be empty");
             return false;
         } else {
@@ -124,44 +123,61 @@ tvforgetPassword.setOnClickListener(new View.OnClickListener() {
 
 
     }
+
     private void LoginUser() {
+        final String username = etusernameUserLog.getText().toString().trim();
+        final String password = etpassUserLog.getText().toString().trim();
 
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = firebaseDatabase.getReference("MyUser");
 
-     final    String username = etusernameUserLog.getText().toString();
-     final    String password = etpassUserLog.getText().toString();
+        Query checkUsername = databaseReference.orderByChild("username").equalTo(username);
 
+        checkUsername.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    etusernameUserLog.setError(null);
+                    Log.d("check",snapshot.toString());
 
-     FirebaseDatabase firebaseDatabase  = FirebaseDatabase.getInstance();
-     DatabaseReference databaseReference = firebaseDatabase.getReference("MyUser");
-     Query check_username= databaseReference.orderByChild("username").equalTo(username);
+                    // Check if the password is correct for the user
+                    for (DataSnapshot childSnapshot : snapshot.getChildren()) {
+                        String dbPassword = childSnapshot.child("password").getValue(String.class);
+                        Log.d("check",dbPassword.toString());
+                        if (dbPassword != null && dbPassword.equals(password)) {
+                            etpassUserLog.setError(null);
+                            String UserKey= childSnapshot.getKey();
+                            storeValueUser(getApplicationContext(), "User");
+                            Log.d("userkey",UserKey);
+                            storeUserKey(getApplicationContext(),UserKey);
+                            Log.d("uservalue",UserKey);
+                            Intent intent = new Intent(getApplicationContext(), MainBasic.class);
+                            startActivity(intent);
+                            finish();
 
-        check_username.addListenerForSingleValueEvent(new ValueEventListener() {
-         @Override
-         public void onDataChange(@NonNull DataSnapshot snapshot) {
-             if(snapshot.exists()){
-                 etusernameUserLog.setError(null);
+                            // Generate a key for the user
+                            String key = childSnapshot.getKey();
 
-                //Check password
-                 String check_pass = snapshot.child(username).child("confirmpassword").getValue(String.class);
-                 if(check_pass.equals(password)){
-                     etpassUserLog.setError(null); Intent intent = new Intent(getApplicationContext(), MainBasic.class);
-                     startActivity(intent);
-                     finish();
-                     overridePendingTransition(R.anim.slide_in_left, android.R.anim.slide_out_right);}
+//                            // Store the key in SharedPreferences
+//                            SharedPreferences preferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+//                            preferences.edit().putString("userKey", key).apply();
 
-                 else { etpassUserLog.setError("Inavlid Password");}
-             }else{
+                            // If the password is correct, start the MainBasic activity
+                            overridePendingTransition(R.anim.slide_in_left, android.R.anim.slide_out_right);
+                            return;
+                        }
+                    }
+                    // Display an error message if the password is incorrect
+                } else {
+                    // Display an error message if the username does not exist
+                }
+            }
 
-                 etusernameUserLog.setError("Inavlid Username");
-             }
-         }
-
-         @Override
-         public void onCancelled(@NonNull DatabaseError error) {
-
-         }
-     });
-
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Handle the error
+            }
+        });
     }
 
     public void onLoginClick(View view) {
@@ -170,8 +186,19 @@ tvforgetPassword.setOnClickListener(new View.OnClickListener() {
 
 
     }
+    private static void storeValueUser(Context context, String value) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(KEY_VALUE, value);
+        editor.apply();
+    }
 
-
+    private static void storeUserKey(Context context, String value) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_USER_KEY, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(USER_KEY, value);
+        editor.apply();
+    }
 }
 
 

@@ -49,8 +49,8 @@ public class custom_bottom_menu<Unit> extends AppCompatActivity {
                         fragment=new home();
                         break;
 
-                    case ID_chat:  new chat();
-                        fragment=new chat();
+                    case ID_chat:  new Inbox();
+                        fragment=new Inbox();
 
                         break;
                     case ID_about: new about();

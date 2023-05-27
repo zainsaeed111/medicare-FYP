@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".UpdateBusinessInfo">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:background="@color/white"
+        android:forceDarkAllowed="false"
+        android:padding="15dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:forceDarkAllowed="false"
+            android:orientation="vertical"
+            android:paddingLeft="35dp"
+            android:paddingTop="20dp"
+            android:paddingRight="35dp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Update"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18sdp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Business Info"
+                android:textColor="@color/primary_color"
+                android:textSize="@dimen/_20sdp"
+                android:textStyle="bold"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:paddingBottom="5dp"
+                android:text="Busniess Name"
+                android:textColor="@color/black" />
+
+            <com.google.android.material.textfield.TextInputEditText
+
+                android:id="@+id/etbusinessnameMyshop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/custom_edittext"
+                android:drawablePadding="10dp"
+                android:inputType="text"
+                android:padding="15dp"
+                android:textColor="@color/black">
+
+            </com.google.android.material.textfield.TextInputEditText>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:text="Registration Number"
+                android:textColor="@color/black" />
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etbusinessregnoMyshop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/custom_edittext"
+                android:drawablePadding="10dp"
+                android:inputType="phone"
+                android:padding="15dp"
+                android:textColor="@color/black">
+
+            </com.google.android.material.textfield.TextInputEditText>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:text="Phone"
+                android:textColor="@color/black" />
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etbusinessphoneMyshop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/custom_edittext"
+                android:drawablePadding="10dp"
+                android:inputType="textEmailAddress"
+                android:padding="15dp"
+                android:textColor="@color/black">
+
+            </com.google.android.material.textfield.TextInputEditText>
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnUpdateMyshop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:background="@drawable/button_background_reg_login"
+                android:text="Update"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:textAllCaps="false"
+                android:textColor="@color/white"/>
+
+            <!--            <ImageView-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_gravity="end"-->
+            <!--                android:layout_marginTop="@dimen/_120sdp"-->
+            <!--                android:layout_marginBottom="25dp"-->
+            <!--                android:src="@drawable/end_line_divider"/>-->
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

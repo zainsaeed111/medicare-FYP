@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.mediworld">
     <permission
         android:name="com.company.app.permission.MAPS_RECEIVE"
@@ -91,6 +92,8 @@
         <activity
             android:name=".order_from_picture"
             android:exported="false" />
+
+
         <activity
             android:name=".OrderNow_Shop"
             android:exported="false" />
@@ -103,9 +106,7 @@
         <activity
             android:name=".Registeri"
             android:exported="false" />
-        <activity
-            android:name=".ordermedicine_test"
-            android:exported="false" />
+
         <activity
             android:name=".selectuser"
             android:exported="false" />

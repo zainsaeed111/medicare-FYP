@@ -2,34 +2,16 @@ package com.example.mediworld;
 
 public class UserHelperClass {
 
-    String username,email,password,confirmpassword;
-    String Phone;
-
-    public UserHelperClass(String username, String email, String phone) {
-    }
-
-    public String getPhone() {
-        return Phone;
-    }
-
-    public void setPhone(String phone) {
-        Phone = phone;
-    }
-
-    public UserHelperClass(String phone) {
-        Phone = phone;
-    }
-
-
+    String username,email,password,phoneno;
 
     public UserHelperClass() {
     }
 
-    public UserHelperClass(String username, String email, String password, String confirmpassword) {
+    public UserHelperClass(String username, String email, String password, String phoneno) {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.confirmpassword = confirmpassword;
+        this.phoneno = phoneno;
     }
 
 
@@ -57,11 +39,11 @@ public class UserHelperClass {
         this.password = password;
     }
 
-    public String getConfirmpassword() {
-        return confirmpassword;
+    public String getPhoneno() {
+        return phoneno;
     }
 
-    public void setConfirmpassword(String confirmpassword) {
-        this.confirmpassword = confirmpassword;
+    public void setPhoneno(String phoneno) {
+        this.phoneno = phoneno;
     }
 }

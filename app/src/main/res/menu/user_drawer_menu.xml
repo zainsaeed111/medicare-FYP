@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/userInbox"
-        android:title="Chat"
-        android:icon="@drawable/btm_chat_selector"/>
-
 
     <item
         android:id="@+id/userHome"
         android:title="Home"
         android:icon="@drawable/btm_home_selector"/>
 
+    <item
+        android:id="@+id/userInbox"
+        android:title="Chat"
+        android:icon="@drawable/btm_chat_selector"/>
+
+
+
+
 
     <item
-        android:id="@+id/userProfile"
+        android:id="@+id/userprofile"
         android:title="Profile"
         android:icon="@drawable/btm_profile_selector"/>
 

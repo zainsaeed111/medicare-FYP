@@ -60,7 +60,7 @@
         android:background="@drawable/button_bg_order"
         android:gravity="center"
         android:minHeight="48dp"
-        android:text="Order Now"
+        android:text="View Store"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="@android:color/white"

@@ -14,15 +14,56 @@
         android:id="@+id/bnmyShop"
         android:name="com.example.mediworld.Shop.MyShop"
         android:label="fragment_my_shop"
-        tools:layout="@layout/fragment_my_shop" />
+        tools:layout="@layout/fragment_my_shop" >
+        <action
+            android:id="@+id/action_bnmyShop_to_updateBusinessInfo"
+            app:destination="@id/updateBusinessInfo" />
+        <action
+            android:id="@+id/action_bnmyShop_to_updateShopPassword"
+            app:destination="@id/updateShopPassword" />
+    </fragment>
     <fragment
-        android:id="@+id/bnchatShop"
-        android:name="com.example.mediworld.chat"
+        android:id="@+id/Inbox"
+        android:name="com.example.mediworld.Inbox"
         android:label="fragment_chat"
-        tools:layout="@layout/fragment_chat" />
+        tools:layout="@layout/fragment_inbox" >
+        <action
+            android:id="@+id/action_Inbox_to_chatFragment2"
+            app:destination="@id/chatFragment2" />
+    </fragment>
     <fragment
         android:id="@+id/addProductFragment2"
         android:name="com.example.mediworld.Shop.AddProductFragment"
         android:label="fragment_add_product"
         tools:layout="@layout/fragment_add_product" />
+    <fragment
+        android:id="@+id/chatFragment2"
+        android:name="com.example.mediworld.ChatFragment"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chat" />
+    <fragment
+        android:id="@+id/shopAbout"
+        android:name="com.example.mediworld.about"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/shopPrivacyPolicy"
+        android:name="com.example.mediworld.UserPrivacyPolicy"
+        android:label="fragment_user_privacy_policy"
+        tools:layout="@layout/fragment_user_privacy_policy" />
+    <fragment
+        android:id="@+id/shopcontactUs"
+        android:name="com.example.mediworld.ContactUs"
+        android:label="fragment_contact_us"
+        tools:layout="@layout/fragment_contact_us" />
+    <fragment
+        android:id="@+id/updateBusinessInfo"
+        android:name="com.example.mediworld.UpdateBusinessInfo"
+        android:label="fragment_update_business_info"
+        tools:layout="@layout/fragment_update_business_info" />
+    <fragment
+        android:id="@+id/updateShopPassword"
+        android:name="com.example.mediworld.Shop.UpdateShopPassword"
+        android:label="fragment_update_shop_password"
+        tools:layout="@layout/fragment_update_shop_password" />
 </navigation>

@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/userInbox"
-        android:title="Chat"
+        android:title="Inbox"
 
         android:icon="@drawable/btm_chat_selector"/>
 
@@ -16,7 +16,7 @@
 
 
     <item
-        android:id="@+id/userProfile"
+        android:id="@+id/userprofile"
         android:title="Profile"
         android:icon="@drawable/btm_profile_selector"/>
 

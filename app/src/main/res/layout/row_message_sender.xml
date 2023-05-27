@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/_5sdp">
+
+    <LinearLayout
+        android:id="@+id/linearthree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <RelativeLayout
+            android:id="@+id/chatreciveLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/message_date">
+
+            <TextView
+                android:id="@+id/tvUserMsg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:padding="@dimen/_7sdp"
+                android:text="zainsaeedsdjsaljljsjlasjljdsalkjsajlasajd"
+                android:textAlignment="center"
+                android:textSize="14sp" />
+
+<!--            <TextView-->
+<!--                android:id="@+id/tvOutgoingMsgTime"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_alignEnd="@+id/tvUserMsg"-->
+<!--                android:layout_gravity="bottom"-->
+<!--                android:layout_below="@+id/tvUserMsg"-->
+<!--                android:layout_marginTop="-10dp"-->
+<!--                android:layout_marginBottom="5dp"-->
+<!--                android:layout_marginEnd="@dimen/_10sdp"-->
+<!--                android:text="9:30 pm"-->
+<!--                android:textSize="@dimen/_10sdp" />-->
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,6 +14,7 @@
     <color name="intro_screen_dialog_text">#707070</color>
 
     <color name="grey">#B1AEAE</color>
+    <color name="price_bg">#F44336</color>
     <color name="register_button_color">#E91E63</color>
     <color name="darkTextColor">#020000</color>
    <!-- <color name="contentTextColor">#020000</color>-->
