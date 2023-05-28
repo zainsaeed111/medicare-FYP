@@ -69,7 +69,7 @@ public class ChatFragment extends Fragment {
 
         binding.sendMessage.setOnClickListener(view1 -> {
             if (binding.etMessage.getText().toString().isEmpty()) {
-                Toast.makeText(getContext(), "Please enter your Message", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Please enter your ChatMessage", Toast.LENGTH_SHORT).show();
             } else {
                 ChatModel message = new ChatModel(binding.etMessage.getText().toString(), senderUid, new Date().getTime());
                 String randomKey = database.getReference().push().getKey();
@@ -82,7 +82,7 @@ public class ChatFragment extends Fragment {
                         .setValue(message)
                         .addOnSuccessListener(aVoid -> {
                             binding.etMessage.setText(null);
-                            Toast.makeText(getContext(), "Message sent", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "ChatMessage sent", Toast.LENGTH_SHORT).show();
                         });
             }
         });

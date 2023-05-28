@@ -43,9 +43,9 @@
         tools:layout="@layout/fragment_emergency_numbers" />
     <fragment
         android:id="@+id/userAIMedicalAssitant"
-        android:name="com.example.mediworld.UserAIMedicalAssitant"
+        android:name="com.example.mediworld.UserAIMedicalAssistant"
         android:label="fragment_user_a_i_medical_assitant"
-        tools:layout="@layout/fragment_user_a_i_medical_assitant" />
+        tools:layout="@layout/fragment_user_assistant" />
     <fragment
         android:id="@+id/userNearbyHospitals"
         android:name="com.example.mediworld.UserNearbyHospitals"

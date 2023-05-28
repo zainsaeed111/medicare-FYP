@@ -33,7 +33,10 @@
         android:value="ocr" />
     <meta-data
         android:name="com.google.android.maps.v2.API_KEY"
-        android:value="AIzaSyDYkFIZlXNg06_V8R1S-hBgBB5xz6wTZRs" />
+        android:value="AIzaSyA9kIwm9j0IJc2eGrOZHdWG31o5pkflOFY" />
+    <meta-data
+        android:name="com.google.android.geo.API_KEY"
+        android:value="AIzaSyA9kIwm9j0IJc2eGrOZHdWG31o5pkflOFY" />
 
     <application
         android:allowBackup="true"

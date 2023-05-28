@@ -26,58 +26,26 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.model.PlaceLikelihood;
+import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest;
+import com.google.android.libraries.places.api.net.PlacesClient;
 
-public class UserNearbyHospitals extends Fragment {
-    private GoogleMap mMap;
+import java.util.Arrays;
+import java.util.List;
+
+
+public class UserNearbyHospitals extends Fragment implements OnMapReadyCallback {
+
     private static final int REQUEST_CODE = 181;
 
     private FragmentUserNearbyHospitalsBinding binding;
     private FusedLocationProviderClient fusedLocationProviderClient;
-    private static final int Request_code = 181;
-    private double lat,lnt;
-    private OnMapReadyCallback callback = new OnMapReadyCallback() {
+    private PlacesClient placesClient;
+    private GoogleMap mMap;
 
-
-
-
-
-
-        @Override
-        public void onMapReady(GoogleMap googleMap) {
-            mMap = googleMap;
-
-            getCurrentLocation();
-            getNearbyLocation();
-//            LatLng sydney = new LatLng(-34, 151);
-//            mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-//            mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-        }
-
-
-
-    };
-
-    private void getNearbyLocation() {
-
-        StringBuilder stringBuilder=new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json");
-        stringBuilder.append("location="+lat+","+lnt);
-        stringBuilder.append("&radius=1000");
-        stringBuilder.append("&type=hospital");
-        stringBuilder.append("&sensor=true");
-        stringBuilder.append("key="+getResources().getString(R.string.google_maps_key));
-        String url=stringBuilder.toString();
-        Object dataFetch[]=new Object[2];
-        dataFetch[0]=mMap;
-        dataFetch[1]=url;
-        FetchData fetchData=new FetchData();
-        fetchData.execute(dataFetch);
-
-
-
-
-    }
+    private double lat, lng;
 
     @Nullable
     @Override
@@ -85,8 +53,7 @@ public class UserNearbyHospitals extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         binding = FragmentUserNearbyHospitalsBinding.inflate(inflater, container, false);
-        View view = binding.getRoot();
-        return view;
+        return binding.getRoot();
     }
 
     @Override
@@ -96,10 +63,16 @@ public class UserNearbyHospitals extends Fragment {
                 .findFragmentById(R.id.map);
 
         if (mapFragment != null) {
-            mapFragment.getMapAsync(callback);
+            mapFragment.getMapAsync(this);
         }
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext());
+
+        // Initialize Places
+        Places.initialize(requireContext(), getString(R.string.google_maps_key));
+
+        // Create a new Places client instance
+        placesClient = Places.createClient(requireContext());
     }
 
     @Override
@@ -108,12 +81,10 @@ public class UserNearbyHospitals extends Fragment {
         binding = null;
     }
 
-
     private void getCurrentLocation() {
         if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // Permission is not granted, request it
-            ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
+            ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_CODE);
             return;
         }
 
@@ -126,48 +97,67 @@ public class UserNearbyHospitals extends Fragment {
             @Override
             public void onLocationResult(@NonNull LocationResult locationResult) {
                 if (locationResult == null || locationResult.getLocations().isEmpty()) {
-                    if (getContext() != null) {
-                        Toast.makeText(getContext(), "Location result is not available", Toast.LENGTH_SHORT).show();
-                    }
+                    Toast.makeText(getContext(), "Location result is not available", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 for (Location location : locationResult.getLocations()) {
                     if (location != null) {
-                        //Toast.makeText(getActivity(), "Location result is: " + location, Toast.LENGTH_SHORT).show();
-
-                        // Set marker and move camera only if location is not null
-                        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-                        mMap.addMarker(new MarkerOptions().position(latLng).title("Current Location"));
-                        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+                        lat = location.getLatitude();
+                        lng = location.getLongitude();
+                        moveCameraToLocation(lat, lng);
+                        fetchNearbyHospitals();
+                        fusedLocationProviderClient.removeLocationUpdates(this);
+                        break;
                     }
                 }
             }
         };
 
-
         fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, null);
-        Task<Location> task = fusedLocationProviderClient.getLastLocation();
-        task.addOnSuccessListener(new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                if (location != null) {
-                    lat = location.getLatitude();
-                    lnt = location.getLongitude();
+    }
+
+    private void moveCameraToLocation(double lat, double lng) {
+        LatLng latLng = new LatLng(lat, lng);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+    }
+
+    private void fetchNearbyHospitals() {
+        List<Place.Field> placeFields = Arrays.asList(Place.Field.NAME, Place.Field.LAT_LNG);
+        FindCurrentPlaceRequest request = FindCurrentPlaceRequest.builder(placeFields).build();
+
+        if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            placesClient.findCurrentPlace(request).addOnSuccessListener((response) -> {
+                for (PlaceLikelihood placeLikelihood : response.getPlaceLikelihoods()) {
+                    if (placeLikelihood.getPlace() != null && placeLikelihood.getPlace().getLatLng() != null) {
+                        mMap.addMarker(new MarkerOptions()
+                                .position(placeLikelihood.getPlace().getLatLng())
+                                .title(placeLikelihood.getPlace().getName()));
+                    }
                 }
-            }
-        });
+            }).addOnFailureListener((exception) -> {
+                Toast.makeText(getContext(), "Failed to fetch nearby hospitals", Toast.LENGTH_SHORT).show();
+            });
+        }
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+        getCurrentLocation();
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case REQUEST_CODE:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    getCurrentLocation();
-                }
-                break;
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                    && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                getCurrentLocation();
+            } else {
+                Toast.makeText(getContext(), "Location permission denied", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

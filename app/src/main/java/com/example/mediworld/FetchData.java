@@ -11,28 +11,41 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class FetchData extends AsyncTask<Object,String,String> {
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Scanner;
 
-    String googleNearByPlacesData;
-    GoogleMap googleMap;
-    String url;
+public class FetchData extends AsyncTask<String, Void, String> {
+
+    private GoogleMap googleMap;
+
+    public void setOnFetchDataListener(GoogleMap googleMap) {
+        this.googleMap = googleMap;
+    }
 
     @Override
-    protected String doInBackground(Object... objects) {
-
+    protected String doInBackground(String... strings) {
+        String urlString = strings[0];
         try {
-            googleMap=(GoogleMap) objects[0];
-            url=(String) objects[1];
-            DownloadUrl downloadUrl= new DownloadUrl();
-            googleNearByPlacesData=downloadUrl.retriveUrl(url);
+            URL url = new URL(urlString);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.connect();
 
+            InputStream inputStream = connection.getInputStream();
+            Scanner scanner = new Scanner(inputStream);
+            StringBuilder stringBuilder = new StringBuilder();
+            while (scanner.hasNext()) {
+                stringBuilder.append(scanner.next());
+            }
+            return stringBuilder.toString();
 
-        }catch (Exception e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
-
-        return googleNearByPlacesData;
-
+        return null;
     }
 
     @Override
@@ -56,8 +69,6 @@ public class FetchData extends AsyncTask<Object,String,String> {
                     googleMap.addMarker(markerOptions);
                     googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
                 }
-
-
 
             } catch (JSONException e) {
                 e.printStackTrace();
