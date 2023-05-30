@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_userHome_to_userAIMedicalAssitant"
             app:destination="@id/userAIMedicalAssitant" />
+        <action
+            android:id="@+id/action_userHome_to_nearbyPharmacies"
+            app:destination="@id/nearbyPharmacies" />
     </fragment>
     <fragment
         android:id="@+id/userInbox"
@@ -75,9 +78,13 @@
         tools:layout="@layout/fragment_contact_us" />
     <fragment
         android:id="@+id/viewPharmciesItems"
-        android:name="com.example.mediworld.ViewPharmciesItems"
+        android:name="com.example.mediworld.ViewPharmaciesItems"
         android:label="fragment_view_pharmcies_items"
-        tools:layout="@layout/fragment_view_pharmcies_items" />
+        tools:layout="@layout/fragment_view_pharmcies_items" >
+        <action
+            android:id="@+id/action_viewPharmciesItems_to_seeAllProducts"
+            app:destination="@id/seeAllProducts" />
+    </fragment>
     <fragment
         android:id="@+id/userOrderMedicine"
         android:name="com.example.mediworld.UserOrderMedicine"
@@ -122,4 +129,19 @@
         android:name="com.example.mediworld.UpdateUserPassword"
         android:label="fragment_update_user_password"
         tools:layout="@layout/fragment_update_user_password" />
+    <fragment
+        android:id="@+id/myChatFragment"
+        android:name="com.example.mediworld.MyChatFragment"
+        android:label="fragment_my_chat"
+        tools:layout="@layout/fragment_my_chat" />
+    <fragment
+        android:id="@+id/nearbyPharmacies"
+        android:name="com.example.mediworld.NearbyPharmacies"
+        android:label="fragment_nearby_pharmacies"
+        tools:layout="@layout/fragment_nearby_pharmacies" />
+    <fragment
+        android:id="@+id/seeAllProducts"
+        android:name="com.example.mediworld.SeeAllProducts"
+        android:label="fragment_see_all_products"
+        tools:layout="@layout/fragment_see_all_products" />
 </navigation>

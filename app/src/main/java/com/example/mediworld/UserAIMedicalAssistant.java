@@ -43,7 +43,7 @@ public class UserAIMedicalAssistant extends Fragment {
     private EditText mEditText;
     private ImageView mButton;
     private String apiUrl = "https://api.openai.com/v1/completions";
-    private String accessToken = "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";
+    private String accessToken = "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";
     private List<ChatMessage> mMessages;
 
     @Override

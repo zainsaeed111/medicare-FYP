@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:gravity="center"
+    android:id="@+id/chatLayout"
+    android:background="@drawable/chat_reciver_bubble"
+    android:visibility="gone"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<TextView
+android:textSize="14sp"
+android:textColor="@color/black"
+android:id="@+id/tvUserMsg"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_margin="10dp"
+android:text="hey" />
+    </RelativeLayout>

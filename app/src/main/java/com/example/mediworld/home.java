@@ -23,6 +23,7 @@ public class home extends Fragment {
    LinearLayout aimedicineBox;
    LinearLayout emgNumBox;
    LinearLayout nearbyHospitalBox;
+   LinearLayout nearbyPharmciesBox;
     View view;
     SliderView sliderView;
     ArrayList<Integer> arrayList= new ArrayList<>();
@@ -41,6 +42,7 @@ public class home extends Fragment {
         aimedicineBox=getView().findViewById(R.id.aimedicineBox);
         nearbyHospitalBox=getView().findViewById(R.id.nearbyHospitalsBox);
         onlinePharmaciesBox=getView().findViewById(R.id.onlinePharmaciesBox);
+        nearbyPharmciesBox=getView().findViewById(R.id.nearbyPharmaciesBox);
 
         sliderView=getView().findViewById(R.id.image_slider);
         arrayList.add(R.drawable.sliderimgiii);
@@ -58,6 +60,17 @@ public class home extends Fragment {
 
 // Navigate to the destination fragment
                 navController.navigate(R.id.action_home2_to_onlinePharmacies);
+            }
+        });
+
+
+        nearbyPharmciesBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavController navController = Navigation.findNavController(view);
+
+// Navigate to the destination fragment
+                navController.navigate(R.id.action_userHome_to_nearbyPharmacies);
             }
         });
         orderMedicinebox.setOnClickListener(new View.OnClickListener() {

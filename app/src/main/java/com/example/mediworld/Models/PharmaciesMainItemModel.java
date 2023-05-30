@@ -8,13 +8,15 @@ public class PharmaciesMainItemModel {
     private int discountedPrice;
     private String imageUrl;
     private String name;
+    private String subcategory;
+    private String productId;
     private int price;
 
     public PharmaciesMainItemModel() {
         // Empty constructor needed for Firebase serialization
     }
 
-    public PharmaciesMainItemModel(String category, String company, String description, String discount, int discountedPrice, String imageUrl, String name, int price) {
+    public PharmaciesMainItemModel(String category, String company, String description, String discount, int discountedPrice, String imageUrl, String name, String subcategory, String productId, int price) {
         this.category = category;
         this.company = company;
         this.description = description;
@@ -22,6 +24,8 @@ public class PharmaciesMainItemModel {
         this.discountedPrice = discountedPrice;
         this.imageUrl = imageUrl;
         this.name = name;
+        this.subcategory = subcategory;
+        this.productId = productId;
         this.price = price;
     }
 
@@ -79,6 +83,22 @@ public class PharmaciesMainItemModel {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getSubcategory() {
+        return subcategory;
+    }
+
+    public void setSubcategory(String subcategory) {
+        this.subcategory = subcategory;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
     public int getPrice() {

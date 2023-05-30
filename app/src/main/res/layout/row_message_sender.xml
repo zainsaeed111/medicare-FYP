@@ -15,13 +15,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-
         <RelativeLayout
             android:id="@+id/chatreciveLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
             android:gravity="center"
+            android:background="@drawable/chat_sender_bubble"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/message_date">
@@ -30,25 +30,17 @@
                 android:id="@+id/tvUserMsg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
                 android:padding="@dimen/_7sdp"
                 android:text="zainsaeedsdjsaljljsjlasjljdsalkjsajlasajd"
-                android:textAlignment="center"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:maxLines="1"
+                android:gravity="start"
+                android:ellipsize="end"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true" />
 
-<!--            <TextView-->
-<!--                android:id="@+id/tvOutgoingMsgTime"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_alignEnd="@+id/tvUserMsg"-->
-<!--                android:layout_gravity="bottom"-->
-<!--                android:layout_below="@+id/tvUserMsg"-->
-<!--                android:layout_marginTop="-10dp"-->
-<!--                android:layout_marginBottom="5dp"-->
-<!--                android:layout_marginEnd="@dimen/_10sdp"-->
-<!--                android:text="9:30 pm"-->
-<!--                android:textSize="@dimen/_10sdp" />-->
         </RelativeLayout>
 
     </LinearLayout>

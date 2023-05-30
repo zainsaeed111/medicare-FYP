@@ -22,12 +22,13 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@drawable/card_bg_items"
             android:padding="@dimen/_12sdp">
 
             <ImageView
                 android:id="@+id/productImg"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
                 android:layout_margin="@dimen/_10sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -53,6 +54,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="20% off"
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/catogeryTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="20% off"
+                    android:visibility="gone"
                     android:textColor="@android:color/white"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -118,9 +128,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ADD TO CART"
+        android:textSize="@dimen/_8sdp"
+        android:textColor="@color/white"
+        android:visibility="gone"
         android:padding="@dimen/_5sdp"
         android:layout_marginTop="@dimen/_5sdp"
-        android:background="@drawable/add_to_cart_btn_bg"
+        android:background="@drawable/button_background_reg_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />

@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mediworld.Models.OnlinePharmaciesModel;
 import com.example.mediworld.R;
-import com.example.mediworld.ViewPharmciesItems;
+import com.example.mediworld.ViewPharmaciesItems;
 
 import java.util.ArrayList;
 
@@ -72,7 +72,7 @@ public class OnlinePharmaciesAdapter extends RecyclerView.Adapter<OnlinePharmaci
                 String value = retrieveValue(context);
                 Log.d("UserKeyAdapter", value.toString());
 
-                ViewPharmciesItems fragment = new ViewPharmciesItems();
+                ViewPharmaciesItems fragment = new ViewPharmaciesItems();
                 //fragment.setArguments(bundle);
                 // Get the nav controller and navigate to the new fragment
                 NavController navController = Navigation.findNavController(v);
@@ -96,7 +96,7 @@ public class OnlinePharmaciesAdapter extends RecyclerView.Adapter<OnlinePharmaci
             super(itemView);
             tvPharmacyName = itemView.findViewById(R.id.pharmacyName);
             tvPharmacyLocation = itemView.findViewById(R.id.pharmacyLocation);
-            btnOrderNow=itemView.findViewById(R.id.btnOrderNow);
+            btnOrderNow=itemView.findViewById(R.id.btnChatNow);
         }
     }
     private static String retrieveValue(Context context) {

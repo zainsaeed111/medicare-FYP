@@ -37,11 +37,14 @@ public class PharmaciesMainItemAdapter extends RecyclerView.Adapter<PharmaciesMa
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         PharmaciesMainItemModel item = itemList.get(position);
-
-        // Load image using Picasso or Glide library
-        Picasso.get().load(item.getImageUrl()).into(holder.productImg);
+        holder.productImg.setImageBitmap(null);
+        Picasso.get()
+                .load(item.getImageUrl())
+                .into(holder.productImg);
+//        Picasso.get().load(item.getImageUrl()).into(holder.productImg);
         holder.discountedTv.setText(item.getDiscount());
         holder.productQuantity.setText(item.getDescription());
+        holder.catogeryTv.setText(item.getCategory());
         holder.discountedPriceTextView.setText(String.valueOf(item.getDiscountedPrice()));
         holder.realPriceTextView.setText(String.valueOf(item.getPrice()));
     }
@@ -53,7 +56,7 @@ public class PharmaciesMainItemAdapter extends RecyclerView.Adapter<PharmaciesMa
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView productImg;
-        private TextView discountedTv, productQuantity, discountedPriceTextView, realPriceTextView;
+        private TextView discountedTv, productQuantity, discountedPriceTextView, realPriceTextView,catogeryTv;
         private Button addToCartBtn;
 
         public ViewHolder(@NonNull View itemView) {
@@ -64,6 +67,7 @@ public class PharmaciesMainItemAdapter extends RecyclerView.Adapter<PharmaciesMa
             productQuantity = itemView.findViewById(R.id.productQuantity);
             discountedPriceTextView = itemView.findViewById(R.id.discountedPriceTextView);
             realPriceTextView = itemView.findViewById(R.id.realPriceTextView);
+            catogeryTv = itemView.findViewById(R.id.catogeryTv);
             addToCartBtn = itemView.findViewById(R.id.addtocartBtn);
         }
     }
