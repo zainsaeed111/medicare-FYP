@@ -7,22 +7,25 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mediworld.Adapters.PharmaciesMainItemAdapter;
 import com.example.mediworld.Models.PharmaciesMainItemModel;
 import com.example.mediworld.databinding.FragmentSeeAllProductsBinding;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+
 
 
 public class SeeAllProducts extends Fragment {
 
     private FragmentSeeAllProductsBinding binding;
-    private PharmaciesMainItemAdapter seeallitemsAdapter;
+    private PharmaciesMainItemAdapter allItemsAdapter;
     private List<PharmaciesMainItemModel> seeallItemsList = new ArrayList<>();
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,14 +38,32 @@ public class SeeAllProducts extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        RecyclerView allItemsRecyclerView = binding.allproductsRecycler;
 
-        // Set up the RecyclerView with grid layout
-        binding.allproductsRecycler.setLayoutManager(new GridLayoutManager(requireContext(), 2));
+        // Get the arguments passed from the previous fragment
+        Bundle args = getArguments();
+        if (args != null) {
+            String regNo = args.getString("regNo");
+            String popularItemsJson = args.getString("popularItems");
+            String latestItemsJson = args.getString("latestItems");
 
-        seeallitemsAdapter = new PharmaciesMainItemAdapter(getContext(), seeallItemsList);
-        binding.allproductsRecycler.setAdapter(seeallitemsAdapter);
+            // Convert the JSON strings back to lists
+            Gson gson = new Gson();
+            Type listType = new TypeToken<List<PharmaciesMainItemModel>>() {}.getType();
+            List<PharmaciesMainItemModel> popularItemsList = gson.fromJson(popularItemsJson, listType);
+            List<PharmaciesMainItemModel> latestItemsList = gson.fromJson(latestItemsJson, listType);
 
-        // Populate the adapter with data or handle the data loading here
+            // Combine the popular and latest items lists
+            seeallItemsList.addAll(popularItemsList);
+            seeallItemsList.addAll(latestItemsList);
+
+            // Set the GridLayoutManager with desired number of columns
+            int numColumns = 2; // You can change this value according to your needs
+            allItemsRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), numColumns));
+            // Set up the RecyclerView with the combined list
+            allItemsAdapter = new PharmaciesMainItemAdapter(getContext(), seeallItemsList);
+            allItemsRecyclerView.setAdapter(allItemsAdapter);
+        }
     }
 
     @Override

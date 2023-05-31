@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mediworld.Models.ChatModel;
 import com.example.mediworld.R;
-import com.example.mediworld.databinding.RowMessageReceiverBinding;
-import com.example.mediworld.databinding.RowMessageSenderBinding;
+import com.example.mediworld.databinding.RowChatReciveBinding;
+import com.example.mediworld.databinding.RowChatSendBinding;
 
 import java.util.ArrayList;
 
@@ -50,7 +50,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             viewHolder.binding.tvUserMsg.setText(message.getMessage());
         } else {
             ReceiverViewHolder viewHolder = (ReceiverViewHolder) holder;
-            viewHolder.binding.tvUserMsg.setText(message.getMessage());
+            viewHolder.binding.message.setText(message.getMessage());
         }
     }
 
@@ -73,20 +73,20 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     public static class SentViewHolder extends RecyclerView.ViewHolder {
-        private RowMessageSenderBinding binding;
+        private RowChatSendBinding binding;
 
         public SentViewHolder(View itemView) {
             super(itemView);
-            binding = RowMessageSenderBinding.bind(itemView);
+            binding = RowChatSendBinding.bind(itemView);
         }
     }
 
     public static class ReceiverViewHolder extends RecyclerView.ViewHolder {
-        private RowMessageReceiverBinding binding;
+        private RowChatReciveBinding binding;
 
         public ReceiverViewHolder(View itemView) {
             super(itemView);
-            binding = RowMessageReceiverBinding.bind(itemView);
+            binding = RowChatReciveBinding.bind(itemView);
         }
     }
     private static String retrieveValue(Context context) {

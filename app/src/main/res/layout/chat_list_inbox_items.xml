@@ -48,6 +48,15 @@
                 android:textStyle="bold">
 
             </TextView>
+            <TextView
+                android:id="@+id/tvtime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Joanne"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold">
+
+            </TextView>
 
 
             <TextView

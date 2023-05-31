@@ -26,7 +26,7 @@ import java.util.ArrayList;
 public class Inbox extends Fragment {
 
     private RecyclerView recyclerView;
-   // private UserInboxAdapter userInboxAdapter;
+    // private UserInboxAdapter userInboxAdapter;
     private ArrayList<InboxListModel> inboxList;
     private static final String PREF_Shop_KEY = "Shop_KEY";
     private static final String Shop_KEY = "shopKey";
@@ -49,12 +49,14 @@ public class Inbox extends Fragment {
 //        birdId = "";
 //        birdname = "";
         currentShopId = retrieveValue(getContext());
+        Log.d("retrieveValue", currentShopId);
+
         database = FirebaseDatabase.getInstance();
         inboxList = new ArrayList<>();
         recyclerView = binding.InboxRecycler;
         adapter = new InboxAdapter(inboxList);
-        recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(adapter);
 
         gptAnswer();
     }
@@ -76,55 +78,73 @@ public class Inbox extends Fragment {
                     childRef.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot snapshot) {
+//                            inboxList.clear();
                             for (DataSnapshot child : snapshot.getChildren()) {
                                 String childkey = child.getKey();
-                                Log.d("child key " , childkey); //chatRoomId = -NVZ-WO8hEAjATiIgdwq1
+                                Log.d("child key ", childkey); //chatRoomId = -NVZ-WO8hEAjATiIgdwq123456789
                                 if (childkey != null && childkey.contains(currentShopId)) {
-                                    Log.d("TAG", "child key " + childkey + "!!");
+                                    Log.d("if", "child key " + childkey + "!!"); //got the node of chatroom
+                                    Log.d("datagot", child.toString());
 
-                                    DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("MyShop");
-                                    dbRef.addValueEventListener(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(DataSnapshot snapshot) {
-                                            for (DataSnapshot ds : snapshot.getChildren()) {
-                                                String usersIds = ds.getKey();
-                                                DatabaseReference usersAds = dbRef.child(usersIds);
-                                                usersAds.addValueEventListener(new ValueEventListener() {
-                                                    @Override
-                                                    public void onDataChange(DataSnapshot usersAds) {
-                                                        for (DataSnapshot userAdsloop : usersAds.getChildren()) {
-                                                            String AdId_UsersNode =  usersAds.child("regNo").getValue(String.class);
+                                    DataSnapshot messagesSnapshot = child.child("messages");
+                                    Log.d("messagesSnapshot", messagesSnapshot.toString());
+                                    for (DataSnapshot messageSnapshot : messagesSnapshot.getChildren()) {
+                                        String senderId = messageSnapshot.child("senderId").getValue(String.class);
+                                        Long timeStamp = messageSnapshot.child("timeStamp").getValue(Long.class);
+                                        String message = messageSnapshot.child("message").getValue(String.class);
 
-                                                            if (AdId_UsersNode.equals(ShopId)) {
-//                                                                senderRooomMapList.add(new Pair<>(key, childkey));
-//                                                                birdname = userAdsloop.child("birdname").getValue(String.class).toString();
-//                                                                birdNameMapList.add(new Pair<>(key, birdname));
-//                                                                birdId = userAdsloop.child("birdid").getValue(String.class).toString();
-//                                                                birdIdMapList.add(new Pair<>(key, birdId));
-//                                                                List<String> birdImageLinkList = userAdsloop.child("birdimagelink").getValue(new GenericTypeIndicator<List<String>>() {});
-//                                                                birdImageLink = birdImageLinkList != null && !birdImageLinkList.isEmpty() ? birdImageLinkList.get(0) : "";
-//                                                                birdImgMapList.add(new Pair<>(key, birdImageLink));
+                                        InboxListModel inboxListModel = new InboxListModel(senderId, timeStamp, message);
+                                        Log.d("inboxListModel", inboxListModel.toString());
 
-                                                                Log.d("TAG", "Gotchildkeyinloop " + childkey.toString());
-                                                                Log.d("TAG", "Got Ad Node UID " + childkey);
-                                                                Log.d("TAG", "userAdsloop " + userAdsloop);
-                                                            }
-                                                        }
-                                                    }
+                                        inboxList.add(inboxListModel);
+                                        Log.d("inboxListModel", String.valueOf(inboxList.size()));
+                                        adapter.notifyDataSetChanged();
 
-                                                    @Override
-                                                    public void onCancelled(DatabaseError error) {
-                                                        // Handle error
-                                                    }
-                                                });
-                                            }
-                                        }
+                                    }
 
-                                        @Override
-                                        public void onCancelled(DatabaseError error) {
-                                            // Handle error
-                                        }
-                                    });
+//                                    DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("MyShop");
+//                                    dbRef.addValueEventListener(new ValueEventListener() {
+//                                        @Override
+//                                        public void onDataChange(DataSnapshot snapshot) {
+//                                            for (DataSnapshot ds : snapshot.getChildren()) {
+//                                                String usersIds = ds.getKey();
+//                                                DatabaseReference usersAds = dbRef.child(usersIds);
+//                                                usersAds.addValueEventListener(new ValueEventListener() {
+//                                                    @Override
+//                                                    public void onDataChange(DataSnapshot usersAds) {
+//                                                        for (DataSnapshot userAdsloop : usersAds.getChildren()) {
+//                                                            String AdId_UsersNode =  usersAds.child("regNo").getValue(String.class);
+//
+//                                                            if (AdId_UsersNode.equals(ShopId)) {
+////                                                                senderRooomMapList.add(new Pair<>(key, childkey));
+////                                                                birdname = userAdsloop.child("birdname").getValue(String.class).toString();
+////                                                                birdNameMapList.add(new Pair<>(key, birdname));
+////                                                                birdId = userAdsloop.child("birdid").getValue(String.class).toString();
+////                                                                birdIdMapList.add(new Pair<>(key, birdId));
+////                                                                List<String> birdImageLinkList = userAdsloop.child("birdimagelink").getValue(new GenericTypeIndicator<List<String>>() {});
+////                                                                birdImageLink = birdImageLinkList != null && !birdImageLinkList.isEmpty() ? birdImageLinkList.get(0) : "";
+////                                                                birdImgMapList.add(new Pair<>(key, birdImageLink));
+//
+//                                                                Log.d("TAG", "Gotchildkeyinloop " + childkey.toString());
+//                                                                Log.d("TAG", "Got Ad Node UID " + childkey);
+//                                                                Log.d("TAG", "userAdsloop " + userAdsloop);
+//                                                            }
+//                                                        }
+//                                                    }
+//
+//                                                    @Override
+//                                                    public void onCancelled(DatabaseError error) {
+//                                                        // Handle error
+//                                                    }
+//                                                });
+//                                            }
+//                                        }
+//
+//                                        @Override
+//                                        public void onCancelled(DatabaseError error) {
+//                                            // Handle error
+//                                        }
+//                                    });
 
                                     Log.d("keybeforechat", ShopId);
                                     Log.d("childkeybeforechat", childkey);
@@ -208,6 +228,7 @@ public class Inbox extends Fragment {
             }
         });
     }
+
     private static String retrieveValue(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_Shop_KEY, Context.MODE_PRIVATE);
         return sharedPreferences.getString(Shop_KEY, null);

@@ -43,7 +43,9 @@ public class UserAIMedicalAssistant extends Fragment {
     private EditText mEditText;
     private ImageView mButton;
     private String apiUrl = "https://api.openai.com/v1/completions";
-    private String accessToken = "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";
+//    private String accessToken = "Bearer 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";
+    private String accessToken = "Bearer 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";
+
     private List<ChatMessage> mMessages;
 
     @Override
@@ -61,6 +63,8 @@ public class UserAIMedicalAssistant extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        Log.d("accessToken", accessToken);
         mRecyclerView = view.findViewById(R.id.recylerviewAI);
         mEditText = view.findViewById(R.id.etMessageAI);
         mButton = view.findViewById(R.id.sendMessageAI);
@@ -118,7 +122,7 @@ public class UserAIMedicalAssistant extends Fragment {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<>();
-                headers.put("Authorization", "Bearer " + accessToken);
+                headers.put("Authorization", accessToken);
                 headers.put("Content-Type", "application/json");
                 return headers;
             }
@@ -139,7 +143,11 @@ public class UserAIMedicalAssistant extends Fragment {
     private void handleAPIError(VolleyError error) {
         NetworkResponse networkResponse = error.networkResponse;
         if (networkResponse != null && networkResponse.statusCode == 429) {
-            retryAPIAfterDelay();
+            String retryAfter = networkResponse.headers.get("Retry-After");
+            if (retryAfter != null) {
+                int delaySeconds = Integer.parseInt(retryAfter);
+                retryAPIAfterDelay(delaySeconds);
+            }
         } else {
             // Handle other types of errors
         }
@@ -153,18 +161,23 @@ public class UserAIMedicalAssistant extends Fragment {
         }
     }
 
-    private void retryAPIAfterDelay() {
-        int delayMilliseconds = 5000; // Retry after 5 seconds (adjust as needed)
+    private void retryAPIAfterDelay(int delaySeconds) {
+        int delayMilliseconds = delaySeconds * 1000; // Convert seconds to milliseconds
+        final int maxRetries = 3; // Maximum number of retry attempts
+        final int backoffMultiplier = 2; // Backoff multiplier for exponential backoff
+        final int retryAttempts = 0; // Retry attempts counter
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                callAPI();
+                if (retryAttempts < maxRetries) {
+                    callAPI();
+                    retryAPIAfterDelay(delaySeconds * backoffMultiplier);
+                } else {
+                    // Handle the case when maximum retries are reached
+                    // For example, display an error message or take appropriate action
+                }
             }
         }, delayMilliseconds);
-    }
-
-    private void retryAPIAfterDelay(int delaySeconds) {
-        int delayMilliseconds = delaySeconds * 1000; // Convert seconds to milliseconds
-        retryAPIAfterDelay(delayMilliseconds);
     }
 }

@@ -23,6 +23,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,9 +56,20 @@ public class ViewPharmaciesItems extends Fragment {
             public void onClick(View view) {
                 // Get the NavController from the host fragment/activity
                 NavController navController = Navigation.findNavController(view);
+                // Create a bundle to pass data to the next fragment
+                // Convert the lists to JSON strings
+                Gson gson = new Gson();
+                String popularItemsJson = gson.toJson(popularItemsList);
+                String latestItemsJson = gson.toJson(latestItemsList);
+
+                // Create a bundle to pass data to the next fragment
+                Bundle bundle = new Bundle();
+                bundle.putString("regNo", regNo);
+                bundle.putString("popularItems", popularItemsJson);
+                bundle.putString("latestItems", latestItemsJson);
 
                 // Navigate to the desired destination fragment
-                navController.navigate(R.id.action_viewPharmciesItems_to_seeAllProducts);
+                navController.navigate(R.id.action_viewPharmciesItems_to_seeAllProducts,bundle);
 
             }
         });

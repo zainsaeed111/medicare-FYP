@@ -45,7 +45,7 @@ public class OnlinePharmaciesAdapter extends RecyclerView.Adapter<OnlinePharmaci
         OnlinePharmaciesModel pharmacy = pharmaciesList.get(position);
         holder.tvPharmacyName.setText(pharmacy.getShopName());
         holder.tvPharmacyLocation.setText(pharmacy.getLocation());
-        holder.btnOrderNow.setOnClickListener(new View.OnClickListener() {
+        holder.btnChatNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String regNo = pharmacy.getRegNo();
@@ -90,13 +90,13 @@ public class OnlinePharmaciesAdapter extends RecyclerView.Adapter<OnlinePharmaci
     public class OnlinePharmaciesViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvPharmacyName, tvPharmacyLocation;
-        Button btnOrderNow;
+        Button btnChatNow;
 
         public OnlinePharmaciesViewHolder(@NonNull View itemView) {
             super(itemView);
             tvPharmacyName = itemView.findViewById(R.id.pharmacyName);
             tvPharmacyLocation = itemView.findViewById(R.id.pharmacyLocation);
-            btnOrderNow=itemView.findViewById(R.id.btnChatNow);
+            btnChatNow=itemView.findViewById(R.id.btnChatNow);
         }
     }
     private static String retrieveValue(Context context) {

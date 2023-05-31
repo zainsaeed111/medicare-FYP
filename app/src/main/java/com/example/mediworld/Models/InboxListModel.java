@@ -1,36 +1,33 @@
 package com.example.mediworld.Models;
 
 public class InboxListModel {
-    private String shopId;
-    private String shopName;
+    private String senderId;
+    private Long timeStamp;
     private String message;
-    private String chatRoomId;
-    private String messageId;
+
 
     public InboxListModel() {}
 
-    public InboxListModel(String pharmacyId, String shopName, String message, String chatRoomId, String messageId) {
-        this.shopId = pharmacyId;
-        this.shopName = shopName;
+    public InboxListModel(String senderId, Long timeStamp, String message) {
+        this.senderId = senderId;
+        this.timeStamp = timeStamp;
         this.message = message;
-        this.chatRoomId = chatRoomId;
-        this.messageId = messageId;
     }
 
-    public String getShopId() {
-        return shopId;
+    public String getSenderId() {
+        return senderId;
     }
 
-    public void setShopId(String shopId) {
-        this.shopId = shopId;
+    public void setSenderId(String senderId) {
+        this.senderId = senderId;
     }
 
-    public String getShopName() {
-        return shopName;
+    public Long getTimeStamp() {
+        return timeStamp;
     }
 
-    public void setShopName(String shopName) {
-        this.shopName = shopName;
+    public void setTimeStamp(Long timeStamp) {
+        this.timeStamp = timeStamp;
     }
 
     public String getMessage() {
@@ -39,21 +36,5 @@ public class InboxListModel {
 
     public void setMessage(String message) {
         this.message = message;
-    }
-
-    public String getChatRoomId() {
-        return chatRoomId;
-    }
-
-    public void setChatRoomId(String chatRoomId) {
-        this.chatRoomId = chatRoomId;
-    }
-
-    public String getMessageId() {
-        return messageId;
-    }
-
-    public void setMessageId(String messageId) {
-        this.messageId = messageId;
     }
 }

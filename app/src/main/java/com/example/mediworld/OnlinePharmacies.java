@@ -1,6 +1,7 @@
 package com.example.mediworld;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,8 +60,12 @@ public class OnlinePharmacies extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 pharmaciesList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Log.d("snapshot", snapshot.toString());
+
                     OnlinePharmaciesModel pharmacy = snapshot.getValue(OnlinePharmaciesModel.class);
                     pharmaciesList.add(pharmacy);
+                    Log.d("pharmaciesList", pharmaciesList.toString());
+
                 }
                 adapter = new OnlinePharmaciesAdapter(getContext(), pharmaciesList);
                 recyclerView.setAdapter(adapter);

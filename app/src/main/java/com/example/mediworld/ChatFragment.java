@@ -54,7 +54,6 @@ public class ChatFragment extends Fragment {
         ShopRegId = args.getString("ShopRegId");
 
         Log.d("chatRoomId", UserId+ShopRegId);
-
         senderUid = UserId;
         receiverUid = ShopRegId;
 

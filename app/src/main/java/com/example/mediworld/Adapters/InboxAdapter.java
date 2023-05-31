@@ -1,72 +1,57 @@
 package com.example.mediworld.Adapters;
 
-import android.content.Context;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import androidx.navigation.Navigation;
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mediworld.Models.InboxListModel;
 import com.example.mediworld.R;
+import com.example.mediworld.databinding.ChatListInboxItemsBinding;
 
-import java.util.ArrayList;
-
-
-public class InboxAdapter extends RecyclerView.Adapter<InboxAdapter.ItemViewHolder> {
-    private ArrayList<InboxListModel> inboxChatItems;
+import java.util.List;
 
 
-    public InboxAdapter(ArrayList<InboxListModel> inboxChatItems) {
-        this.inboxChatItems = inboxChatItems;
+public class InboxAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private List<InboxListModel> inboxList;
+
+    public InboxAdapter(List<InboxListModel> inboxList) {
+        this.inboxList = inboxList;
+    }
+
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        View view = layoutInflater.inflate(R.layout.chat_list_inbox_items, parent, false);
+        return new ViewHolder(view);
     }
 
     @Override
-    public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
-        View view = LayoutInflater.from(context).inflate(R.layout.chat_list_inbox_items, parent, false);
-        return new ItemViewHolder(view);
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        InboxListModel inboxItem = inboxList.get(position);
+        InboxAdapter.ViewHolder viewHolder = (InboxAdapter.ViewHolder) holder;
+
+        viewHolder.binding.tvname.setText(inboxItem.getSenderId());
+        viewHolder.binding.tvtime.setText(String.valueOf(inboxItem.getTimeStamp()));
+        viewHolder.binding.tvmessage.setText(inboxItem.getMessage());
     }
+
+
 
     @Override
     public int getItemCount() {
-        return inboxChatItems.size();
+        return inboxList.size();
     }
 
-    @Override
-    public void onBindViewHolder(ItemViewHolder holder, int position) {
-        InboxListModel inboxList = inboxChatItems.get(position);
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        private ChatListInboxItemsBinding binding;
 
-        holder.shopName.setText(inboxList.getShopName());
-        holder.message.setText(inboxList.getMessage());
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle bundle = new Bundle();
-                bundle.putString("ShopId", inboxList.getShopId());
-                bundle.putString("ShopName", inboxList.getShopName());
-                bundle.putString("senderRoomId", inboxList.getChatRoomId());
-
-                Navigation.findNavController(view).navigate(R.id.action_Inbox_to_chatFragment2, bundle);
-            }
-        });
-    }
-
-    public class ItemViewHolder extends RecyclerView.ViewHolder {
-        TextView shopName;
-        TextView message;
-        TextView messageTime;
-
-        public ItemViewHolder(View itemView) {
+        public ViewHolder(View itemView) {
             super(itemView);
-            shopName = itemView.findViewById(R.id.tvName);
-            message = itemView.findViewById(R.id.tvmessage);
+            binding = ChatListInboxItemsBinding.bind(itemView);
         }
     }
-
 }
-
-
