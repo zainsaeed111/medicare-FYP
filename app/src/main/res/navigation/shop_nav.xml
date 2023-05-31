@@ -66,4 +66,9 @@
         android:name="com.example.mediworld.Shop.UpdateShopPassword"
         android:label="fragment_update_shop_password"
         tools:layout="@layout/fragment_update_shop_password" />
+    <fragment
+        android:id="@+id/viewMyProducts"
+        android:name="com.example.mediworld.ViewMyProducts"
+        android:label="fragment_view_my_products"
+        tools:layout="@layout/fragment_view_my_products" />
 </navigation>

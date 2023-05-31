@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:padding="@dimen/_8sdp"
+    android:clickable="true"
+    android:focusable="true"
+    android:layout_margin="@dimen/_5sdp"
+    android:background="@drawable/doted_border_grey"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/deleteivBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/delete_icon" />
+
+    <ImageView
+        android:id="@+id/myproductImg"
+        android:layout_width="@dimen/_60sdp"
+        android:layout_height="@dimen/_60sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/add_img_icon_addproduct" />
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_60sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/myproductImg"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:id="@+id/myproductName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pandol"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_11sdp"
+            android:textStyle="bold"></TextView>
+
+        <TextView
+            android:id="@+id/myproductDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="Add Your Desc Description"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_11sdp"></TextView>
+
+        <TextView
+            android:id="@+id/myproductPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="Price: $74.50"></TextView>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/myproductDiscount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="55dp"
+        android:text="30%"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deleteivBtn" />
+</androidx.constraintlayout.widget.ConstraintLayout>

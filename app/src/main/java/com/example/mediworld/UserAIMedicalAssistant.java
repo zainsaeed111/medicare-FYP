@@ -44,7 +44,7 @@ public class UserAIMedicalAssistant extends Fragment {
     private ImageView mButton;
     private String apiUrl = "https://api.openai.com/v1/completions";
 //    private String accessToken = "Bearer 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";
-    private String accessToken = "Bearer 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";
+    private String accessToken = "Bearer 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";
 
     private List<ChatMessage> mMessages;
 
