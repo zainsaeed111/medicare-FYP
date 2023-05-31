@@ -19,6 +19,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -28,8 +29,8 @@ public class Inbox extends Fragment {
     private RecyclerView recyclerView;
     // private UserInboxAdapter userInboxAdapter;
     private ArrayList<InboxListModel> inboxList;
-    private static final String PREF_Shop_KEY = "Shop_KEY";
-    private static final String Shop_KEY = "shopKey";
+    private static final String PREF_USER_KEY = "USER_KEY";
+    private static final String USER_KEY = "userKey";
 
     private DatabaseReference myShopReference;
     private FragmentInboxBinding binding;
@@ -87,20 +88,31 @@ public class Inbox extends Fragment {
                                     Log.d("datagot", child.toString());
 
                                     DataSnapshot messagesSnapshot = child.child("messages");
-                                    Log.d("messagesSnapshot", messagesSnapshot.toString());
-                                    for (DataSnapshot messageSnapshot : messagesSnapshot.getChildren()) {
-                                        String senderId = messageSnapshot.child("senderId").getValue(String.class);
-                                        Long timeStamp = messageSnapshot.child("timeStamp").getValue(Long.class);
-                                        String message = messageSnapshot.child("message").getValue(String.class);
+                                    Query lastMessageRef = messagesSnapshot.getRef().orderByKey().limitToLast(1);
+                                    lastMessageRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(DataSnapshot snapshot) {
+                                            if (snapshot.exists()) {
+                                                DataSnapshot lastMessageSnapshot = snapshot.getChildren().iterator().next();
 
-                                        InboxListModel inboxListModel = new InboxListModel(senderId, timeStamp, message);
-                                        Log.d("inboxListModel", inboxListModel.toString());
+                                                String senderId = lastMessageSnapshot.child("senderId").getValue(String.class);
+                                                Long timeStamp = lastMessageSnapshot.child("timeStamp").getValue(Long.class);
+                                                String message = lastMessageSnapshot.child("message").getValue(String.class);
 
-                                        inboxList.add(inboxListModel);
-                                        Log.d("inboxListModel", String.valueOf(inboxList.size()));
-                                        adapter.notifyDataSetChanged();
+                                                InboxListModel inboxListModel = new InboxListModel(senderId, timeStamp, message);
+                                                Log.d("inboxListModel", inboxListModel.toString());
 
-                                    }
+                                                inboxList.add(inboxListModel);
+                                                Log.d("inboxListModel", String.valueOf(inboxList.size()));
+                                                adapter.notifyDataSetChanged();
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(DatabaseError error) {
+                                            // Handle error
+                                        }
+                                    });
 
 //                                    DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("MyShop");
 //                                    dbRef.addValueEventListener(new ValueEventListener() {
@@ -230,7 +242,7 @@ public class Inbox extends Fragment {
     }
 
     private static String retrieveValue(Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_Shop_KEY, Context.MODE_PRIVATE);
-        return sharedPreferences.getString(Shop_KEY, null);
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_USER_KEY, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(USER_KEY, null);
     }
 }

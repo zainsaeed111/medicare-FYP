@@ -23,8 +23,8 @@ public class shop_login extends AppCompatActivity {
     private ActivityShopLoginBinding binding;
     private static final String PREF_NAME = "MyPreferences";
     private static final String KEY_VALUE = "myValue";
-    private static final String PREF_Shop_KEY = "Shop_KEY";
-    private static final String Shop_KEY = "shopKey";
+    private static final String PREF_USER_KEY = "USER_KEY";
+    private static final String USER_KEY = "userKey";
     private static final String PREF_Shop_KEY_New = "Shop_KEY_New";
     private static final String Shop_KEY_New = "newshopKey";
     @Override
@@ -183,9 +183,9 @@ public class shop_login extends AppCompatActivity {
     }
 
     private static void storeShopKey(Context context, String value) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_Shop_KEY, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_USER_KEY, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(Shop_KEY, value);
+        editor.putString(USER_KEY, value);
         editor.apply();
     }
     private void storeShopKeyNew(Context context, String value) {
