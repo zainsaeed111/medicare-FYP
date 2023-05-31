@@ -73,7 +73,7 @@ public class Inbox extends Fragment {
 //                List<Pair<String, String>> birdImgMapList = new ArrayList<>();
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     String ShopId = ds.getKey();
-                    Log.d("TAGShopId", ShopId); //ShopId==1
+                    Log.d("TAGShopId", ShopId); //ShopId=111111
 
                     DatabaseReference childRef = dbRef.child(ShopId);
                     childRef.addValueEventListener(new ValueEventListener() {
@@ -84,7 +84,7 @@ public class Inbox extends Fragment {
                                 String childkey = child.getKey();
                                 Log.d("child key ", childkey); //chatRoomId = -NVZ-WO8hEAjATiIgdwq123456789
                                 if (childkey != null && childkey.contains(currentShopId)) {
-                                    Log.d("if", "child key " + childkey + "!!"); //got the node of chatroom
+                                    Log.d("insidecondition", "child key " + childkey + "!!"); //got the node of chatroom -NVZ-WO8hEAjATiIgdwq111111
                                     Log.d("datagot", child.toString());
 
                                     DataSnapshot messagesSnapshot = child.child("messages");
@@ -95,11 +95,14 @@ public class Inbox extends Fragment {
                                             if (snapshot.exists()) {
                                                 DataSnapshot lastMessageSnapshot = snapshot.getChildren().iterator().next();
 
+                                                String shopID=ShopId;
+                                                String chatRoom=childkey;
+
                                                 String senderId = lastMessageSnapshot.child("senderId").getValue(String.class);
                                                 Long timeStamp = lastMessageSnapshot.child("timeStamp").getValue(Long.class);
                                                 String message = lastMessageSnapshot.child("message").getValue(String.class);
 
-                                                InboxListModel inboxListModel = new InboxListModel(senderId, timeStamp, message);
+                                                InboxListModel inboxListModel = new InboxListModel(senderId, timeStamp, message,shopID,chatRoom);
                                                 Log.d("inboxListModel", inboxListModel.toString());
 
                                                 inboxList.add(inboxListModel);

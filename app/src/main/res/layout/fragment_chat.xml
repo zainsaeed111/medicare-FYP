@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".ChatFragment"
-    >
-   <!-- <include
-        android:id="@+id/toolbar2"
-        layout="@layout/topbarchat"
-        app:layout_constraintTop_toTopOf="parent" />
--->
+    tools:context=".ChatFragment">
+    <!-- <include
+         android:id="@+id/toolbar2"
+         layout="@layout/topbarchat"
+         app:layout_constraintTop_toTopOf="parent" />
+ -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvChat"
         android:layout_width="match_parent"
@@ -20,20 +19,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/endLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@drawable/custom_edittext"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:id="@+id/endLayout"
         android:layout_marginBottom="80dp"
+        android:background="@drawable/custom_edittext"
+        android:orientation="horizontal"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        >
+        app:layout_constraintStart_toStartOf="parent">
 
 
         <com.google.android.material.textfield.TextInputEditText
@@ -41,9 +40,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
 
+            android:background="@null"
             android:hint="Type Here"
             android:inputType="text"
-            android:background="@null"
             android:maxLines="1"
             android:padding="15dp"
             android:textColor="@color/black"
@@ -58,9 +57,9 @@
             android:id="@+id/sendMessage"
             android:layout_width="35dp"
             android:layout_height="35dp"
+            android:layout_marginEnd="10dp"
             android:background="@null"
             android:src="@drawable/ind_chat_send_icon"
-            android:layout_marginEnd="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

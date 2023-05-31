@@ -1,5 +1,7 @@
 package com.example.mediworld;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -37,6 +39,8 @@ public class ChatFragment extends Fragment {
     private String chatRoomId;
 
     private ArrayList<ChatModel> list;
+    private static final String PREF_NAME = "MyPreferences";
+    private static final String KEY_VALUE = "myValue";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,17 +53,52 @@ public class ChatFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ((AppCompatActivity) requireActivity()).getSupportActionBar().hide();
-        Bundle args = getArguments();
-        UserId = args.getString("UserId");
-        ShopRegId = args.getString("ShopRegId");
-
-        Log.d("chatRoomId", UserId+ShopRegId);
-        senderUid = UserId;
-        receiverUid = ShopRegId;
+        String value = retrieveValue(requireContext());
 
         database = FirebaseDatabase.getInstance();
 
-        chatRoomId = senderUid + receiverUid;
+        Bundle args1 = getArguments();
+        Boolean isInboxGraph = args1.getBoolean("isInboxGraph");
+        if (value == "Shop") {
+            if (isInboxGraph) {
+                Bundle args = getArguments();
+                receiverUid = args.getString("shopID");
+                chatRoomId = args.getString("chatRoom");
+                senderUid = args.getString("shopID");
+                Log.d("FromInbox", "FromInbox");
+                Log.d("FromInbox", receiverUid);
+                Log.d("FromInbox", chatRoomId);
+            } else {
+                Bundle args = getArguments();
+                UserId = args.getString("UserId");
+                ShopRegId = args.getString("ShopRegId");
+                Log.d("chatRoomId", UserId + ShopRegId);
+                senderUid = UserId;
+                receiverUid = ShopRegId;
+                chatRoomId = senderUid + receiverUid;
+            }
+        }
+        else{
+            if (isInboxGraph) {
+                Bundle args = getArguments();
+                receiverUid = args.getString("shopID");
+                chatRoomId = args.getString("chatRoom");
+                senderUid = args.getString("SenderId");
+                Log.d("FromInbox", "FromInbox");
+                Log.d("FromInbox", receiverUid);
+                Log.d("FromInbox", chatRoomId);
+            } else {
+                Bundle args = getArguments();
+                UserId = args.getString("UserId");
+                ShopRegId = args.getString("ShopRegId");
+                Log.d("chatRoomId", UserId + ShopRegId);
+                senderUid = UserId;
+                receiverUid = ShopRegId;
+                chatRoomId = senderUid + receiverUid;
+            }
+        }
+
+
 
         bPicture = requireArguments().getString("bPicture");
         adName = requireArguments().getString("adName");
@@ -89,7 +128,7 @@ public class ChatFragment extends Fragment {
         getMessages();
     }
 
-    private void getMessages() {
+        private void getMessages() {
         database.getReference().child("chats").child(receiverUid).child(chatRoomId)
                 .child("messages").addValueEventListener(new ValueEventListener() {
                     @Override
@@ -105,8 +144,10 @@ public class ChatFragment extends Fragment {
                         }
                         Log.d("listsize", String.valueOf(list.size()));
                         ChatAdapter chatAdapter = new ChatAdapter(list, getContext());
+                        chatAdapter.notifyDataSetChanged();
                         binding.rvChat.setLayoutManager(new LinearLayoutManager(getContext()));
                         binding.rvChat.setAdapter(chatAdapter);
+
                     }
 
 
@@ -116,5 +157,9 @@ public class ChatFragment extends Fragment {
                         Log.e("ChatFragment", error.getMessage());
                     }
                 });
+    }
+    private static String retrieveValue(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_VALUE, null);
     }
 }

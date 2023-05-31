@@ -4,14 +4,18 @@ public class InboxListModel {
     private String senderId;
     private Long timeStamp;
     private String message;
+    private String shopID;
+    private String chatRoom;
 
 
     public InboxListModel() {}
 
-    public InboxListModel(String senderId, Long timeStamp, String message) {
+    public InboxListModel(String senderId, Long timeStamp, String message, String shopID, String chatRoom) {
         this.senderId = senderId;
         this.timeStamp = timeStamp;
         this.message = message;
+        this.shopID = shopID;
+        this.chatRoom = chatRoom;
     }
 
     public String getSenderId() {
@@ -36,5 +40,21 @@ public class InboxListModel {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getShopID() {
+        return shopID;
+    }
+
+    public void setShopID(String shopID) {
+        this.shopID = shopID;
+    }
+
+    public String getChatRoom() {
+        return chatRoom;
+    }
+
+    public void setChatRoom(String chatRoom) {
+        this.chatRoom = chatRoom;
     }
 }
