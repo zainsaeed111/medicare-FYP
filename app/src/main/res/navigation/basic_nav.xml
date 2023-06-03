@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_userHome_to_nearbyPharmacies"
             app:destination="@id/nearbyPharmacies" />
+        <action
+            android:id="@+id/action_userHome_to_myOrders"
+            app:destination="@id/myOrders" />
     </fragment>
     <fragment
         android:id="@+id/userInbox"
@@ -84,6 +87,9 @@
         <action
             android:id="@+id/action_viewPharmciesItems_to_seeAllProducts"
             app:destination="@id/seeAllProducts" />
+        <action
+            android:id="@+id/action_viewPharmciesItems_to_productDetail"
+            app:destination="@id/productDetail" />
     </fragment>
     <fragment
         android:id="@+id/userOrderMedicine"
@@ -101,7 +107,11 @@
         android:id="@+id/userOrderFromPrescription"
         android:name="com.example.mediworld.UserOrderFromPrescription"
         android:label="fragment_user_order_from_prescription"
-        tools:layout="@layout/fragment_user_order_from_prescription" />
+        tools:layout="@layout/fragment_user_order_from_prescription" >
+        <action
+            android:id="@+id/action_userOrderFromPrescription_to_chatFragment"
+            app:destination="@id/chatFragment" />
+    </fragment>
     <fragment
         android:id="@+id/chatFragment"
         android:name="com.example.mediworld.ChatFragment"
@@ -143,5 +153,19 @@
         android:id="@+id/seeAllProducts"
         android:name="com.example.mediworld.SeeAllProducts"
         android:label="fragment_see_all_products"
-        tools:layout="@layout/fragment_see_all_products" />
+        tools:layout="@layout/fragment_see_all_products" >
+        <action
+            android:id="@+id/action_seeAllProducts_to_productDetail"
+            app:destination="@id/productDetail" />
+    </fragment>
+    <fragment
+        android:id="@+id/productDetail"
+        android:name="com.example.mediworld.ProductDetail"
+        android:label="fragment_product_detail"
+        tools:layout="@layout/fragment_product_detail" />
+    <fragment
+        android:id="@+id/myOrders"
+        android:name="com.example.mediworld.MyOrders"
+        android:label="fragment_my_orders"
+        tools:layout="@layout/fragment_my_orders" />
 </navigation>

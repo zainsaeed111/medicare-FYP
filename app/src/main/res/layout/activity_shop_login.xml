@@ -46,7 +46,6 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             app:passwordToggleTint="@color/grey"
-            app:passwordToggleEnabled="true"
             app:hintEnabled="false"
             android:layout_marginBottom="5dp"
             app:hintAnimationEnabled="false"

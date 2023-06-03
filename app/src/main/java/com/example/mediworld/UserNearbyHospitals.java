@@ -137,7 +137,9 @@ public class UserNearbyHospitals extends Fragment implements OnMapReadyCallback 
                     }
                 }
             }).addOnFailureListener((exception) -> {
-                Toast.makeText(getContext(), "Failed to fetch nearby hospitals", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getContext(), "Failed to fetch nearby hospitals", Toast.LENGTH_SHORT).show();
+                 Toast.makeText(getContext(), "Your free trail is expire for fething location Buy Plan of New APi Key", Toast.LENGTH_LONG).show();
+
             });
         }
     }

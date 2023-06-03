@@ -8,21 +8,49 @@
     tools:context=".order_from_picture">
 
     <ImageView
-        android:layout_gravity="center"
-        android:foregroundGravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageId"/>
-    <Button
+        android:id="@+id/imageId"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scaleType="centerInside"
+        android:adjustViewBounds="true" />
+
+    <androidx.appcompat.widget.AppCompatButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="take pic"
-        android:onClick="doProcess"/>
-    <TextView
-        android:layout_gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/loginViewsMargin"
+        android:layout_margin="@dimen/_10sdp"
+        android:background="@drawable/button_background_reg_login"
         android:gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textId"/>
+        android:onClick="doProcess"
+        android:minHeight="48dp"
+        android:text="Upload Prescription Image"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:initialCornerAngle="27dp"
+        app:spinning_bar_color="#FFF"
+        app:spinning_bar_padding="6dp"
+        app:spinning_bar_width="4dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <EditText
+            android:id="@+id/textId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:hint="Your Precription or Uploaded Products"
+            android:background="@drawable/custom_edittext"
+            android:inputType="textMultiLine"
+            android:lines="5"
+            android:maxLines="10"
+            android:minLines="5"
+            android:scrollbars="vertical" />
+    </ScrollView>
 
 </LinearLayout>

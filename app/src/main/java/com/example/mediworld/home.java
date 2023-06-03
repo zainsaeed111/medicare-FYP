@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
@@ -43,6 +44,7 @@ public class home extends Fragment {
         nearbyHospitalBox=getView().findViewById(R.id.nearbyHospitalsBox);
         onlinePharmaciesBox=getView().findViewById(R.id.onlinePharmaciesBox);
         nearbyPharmciesBox=getView().findViewById(R.id.nearbyPharmaciesBox);
+       Button btnViewmyorders=getView().findViewById(R.id.btnViewmyorders);
 
         sliderView=getView().findViewById(R.id.image_slider);
         arrayList.add(R.drawable.sliderimgiii);
@@ -63,6 +65,16 @@ public class home extends Fragment {
             }
         });
 
+
+        btnViewmyorders.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavController navController = Navigation.findNavController(view);
+
+// Navigate to the destination fragment
+                navController.navigate(R.id.action_userHome_to_myOrders);
+            }
+        });
 
         nearbyPharmciesBox.setOnClickListener(new View.OnClickListener() {
             @Override

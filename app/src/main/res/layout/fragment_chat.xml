@@ -15,6 +15,7 @@
         android:id="@+id/rvChat"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_margin="@dimen/_5sdp"
         app:layout_constraintBottom_toTopOf="@+id/endLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="@dimen/_50sdp"
         android:background="@drawable/custom_edittext"
         android:orientation="horizontal"
 
@@ -35,24 +36,38 @@
         app:layout_constraintStart_toStartOf="parent">
 
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etMessage"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:orientation="horizontal"
+    app:layout_constraintStart_toStartOf="parent">
+    <ImageView
+        android:id="@+id/ivuploadImg"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:src="@drawable/baseline_add_box_24"></ImageView>
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/etMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
 
-            android:background="@null"
-            android:hint="Type Here"
-            android:inputType="text"
-            android:maxLines="1"
-            android:padding="15dp"
-            android:textColor="@color/black"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/sendMessage"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+        android:background="@null"
+        android:hint="Type Here"
+        android:inputType="text"
+        android:maxLines="1"
+        android:padding="15dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/sendMessage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        </com.google.android.material.textfield.TextInputEditText>
+    </com.google.android.material.textfield.TextInputEditText>
 
+
+</LinearLayout>
         <ImageView
             android:id="@+id/sendMessage"
             android:layout_width="35dp"
@@ -63,6 +78,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

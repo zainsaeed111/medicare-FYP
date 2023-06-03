@@ -2,12 +2,12 @@ package com.example.mediworld;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -43,15 +43,9 @@ public class UserAIMedicalAssistant extends Fragment {
     private EditText mEditText;
     private ImageView mButton;
     private String apiUrl = "https://api.openai.com/v1/completions";
-//    private String accessToken = "Bearer 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";
-    private String accessToken = "Bearer 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";
+    private String accessToken = "Bearer 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";
 
     private List<ChatMessage> mMessages;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,7 +58,6 @@ public class UserAIMedicalAssistant extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Log.d("accessToken", accessToken);
         mRecyclerView = view.findViewById(R.id.recylerviewAI);
         mEditText = view.findViewById(R.id.etMessageAI);
         mButton = view.findViewById(R.id.sendMessageAI);
@@ -72,6 +65,7 @@ public class UserAIMedicalAssistant extends Fragment {
         mAdapter = new MessageAdapter(mMessages);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         mRecyclerView.setAdapter(mAdapter);
+
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -105,7 +99,6 @@ public class UserAIMedicalAssistant extends Fragment {
                             JSONArray choicesArray = response.getJSONArray("choices");
                             JSONObject choiceObject = choicesArray.getJSONObject(0);
                             String text = choiceObject.getString("text");
-                            Log.e("API Response", response.toString());
                             mMessages.add(new ChatMessage(text.replaceFirst("\n", "").replaceFirst("\n", ""), false));
                             mAdapter.notifyItemInserted(mMessages.size() - 1);
                         } catch (JSONException e) {
@@ -146,7 +139,7 @@ public class UserAIMedicalAssistant extends Fragment {
             String retryAfter = networkResponse.headers.get("Retry-After");
             if (retryAfter != null) {
                 int delaySeconds = Integer.parseInt(retryAfter);
-                retryAPIAfterDelay(delaySeconds);
+                retryAPIAfterDelay(delaySeconds, 0);
             }
         } else {
             // Handle other types of errors
@@ -157,27 +150,30 @@ public class UserAIMedicalAssistant extends Fragment {
         String retryAfter = response.headers.get("Retry-After");
         if (retryAfter != null) {
             int delaySeconds = Integer.parseInt(retryAfter);
-            retryAPIAfterDelay(delaySeconds);
+            retryAPIAfterDelay(delaySeconds, 0);
         }
     }
 
-    private void retryAPIAfterDelay(int delaySeconds) {
+    private void retryAPIAfterDelay(int delaySeconds, final int retryAttempts) {
         int delayMilliseconds = delaySeconds * 1000; // Convert seconds to milliseconds
         final int maxRetries = 3; // Maximum number of retry attempts
         final int backoffMultiplier = 2; // Backoff multiplier for exponential backoff
-        final int retryAttempts = 0; // Retry attempts counter
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 if (retryAttempts < maxRetries) {
                     callAPI();
-                    retryAPIAfterDelay(delaySeconds * backoffMultiplier);
+                    retryAPIAfterDelay(delaySeconds * backoffMultiplier, retryAttempts + 1);
                 } else {
                     // Handle the case when maximum retries are reached
-                    // For example, display an error message or take appropriate action
+                    showToast("API session timed out. Please try again later.");
                 }
             }
         }, delayMilliseconds);
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
     }
 }

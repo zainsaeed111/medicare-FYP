@@ -1,29 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".UserOrderFromPrescription">
 
-    <ImageView
-        android:layout_gravity="center"
-        android:foregroundGravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageId"/>
-    <Button
-        android:id="@+id/btnCapture"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="take pic"
-        android:onClick="doProcess"/>
-    <TextView
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textId"/>
+        android:orientation="vertical">
 
-</LinearLayout>
+        <ImageView
+            android:id="@+id/imageId"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_200sdp"
+            android:layout_weight="1"
+            android:layout_margin="@dimen/_15sdp"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
+            android:background="@drawable/rounded_image_border" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnuplaodImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/loginViewsMargin"
+            android:layout_margin="@dimen/_10sdp"
+            android:background="@drawable/unclickied_btn_bg"
+            android:gravity="center"
+
+            android:onClick="doProcess"
+            android:minHeight="48dp"
+            android:text="Upload Prescription Image"
+            android:textAlignment="center"
+            android:textColor="@color/primary_color"
+            android:textStyle="bold"
+            app:initialCornerAngle="27dp"
+            app:spinning_bar_color="#FFF"
+            app:spinning_bar_padding="6dp"
+            app:spinning_bar_width="4dp" />
+
+        <EditText
+            android:id="@+id/textId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:layout_margin="@dimen/_10sdp"
+            android:hint="Your Precription or Uploaded Products"
+            android:background="@drawable/custom_edittext"
+            android:inputType="textMultiLine"
+            android:lines="5"
+            android:maxLines="10"
+            android:minLines="5"
+            android:scrollbars="vertical" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnProceedNext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/loginViewsMargin"
+            android:layout_margin="@dimen/_10sdp"
+            android:background="@drawable/button_background_reg_login"
+            android:gravity="center"
+            android:minHeight="48dp"
+            android:text="Send Order Request"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:initialCornerAngle="27dp"
+            app:spinning_bar_color="#FFF"
+            app:spinning_bar_padding="6dp"
+            app:spinning_bar_width="4dp" />
+
+
+    </LinearLayout>
+
+</ScrollView>

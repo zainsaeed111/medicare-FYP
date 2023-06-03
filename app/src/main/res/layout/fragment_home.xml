@@ -100,6 +100,7 @@
 
 
                 <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnViewmyorders"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -238,7 +239,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:text="AI Medicine\n Assistant"
+                                android:text="Medicine\n Assistant"
                                 android:textAlignment="center"
                                 android:textColor="@color/primary_color"
                                 android:textStyle="bold"></TextView>

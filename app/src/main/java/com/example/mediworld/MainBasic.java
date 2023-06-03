@@ -42,12 +42,14 @@ public class MainBasic extends AppCompatActivity {
         setContentView(binding.getRoot());
         getSupportActionBar().hide();
         toolbar = findViewById(R.id.shopToolbar);
+
 //       // setSupportActionBar(toolbar);
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 //        getSupportActionBar().setDisplayShowHomeEnabled(true);
         // Find Nav Host Fragment
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.showBottomHome);
-        NavController navController = navHostFragment.getNavController();
+//        NavController navController = navHostFragment.getNavController();
+        navController = navHostFragment.getNavController();
 
         // Set Bottom Navigation and Pass nav controller to handle item clicks and change fragments
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNav);
@@ -128,8 +130,33 @@ public class MainBasic extends AppCompatActivity {
                     backImgbtn.setVisibility(View.VISIBLE);
                     drawerImgbtn.setVisibility(View.GONE);
                     break;
+                case R.id.nearbyPharmacies:
+                    toolbarTitle.setText("NearbyPharmcies");
+                    backImgbtn.setVisibility(View.VISIBLE);
+                    drawerImgbtn.setVisibility(View.GONE);
+                    break;
                 case R.id.userNearbyHospitals:
                     toolbarTitle.setText("NearbyHospitals");
+                    backImgbtn.setVisibility(View.VISIBLE);
+                    drawerImgbtn.setVisibility(View.GONE);
+                    break;
+                case R.id.updatePersonalInfo:
+                    toolbarTitle.setText("Update your Info");
+                    backImgbtn.setVisibility(View.VISIBLE);
+                    drawerImgbtn.setVisibility(View.GONE);
+                    break;
+                case R.id.updateUserPassword:
+                    toolbarTitle.setText("Update your Password");
+                    backImgbtn.setVisibility(View.VISIBLE);
+                    drawerImgbtn.setVisibility(View.GONE);
+                    break;
+                case R.id.seeAllProducts:
+                    toolbarTitle.setText("All Products");
+                    backImgbtn.setVisibility(View.VISIBLE);
+                    drawerImgbtn.setVisibility(View.GONE);
+                    break;
+                case R.id.productDetail:
+                    toolbarTitle.setText("Product Detail");
                     backImgbtn.setVisibility(View.VISIBLE);
                     drawerImgbtn.setVisibility(View.GONE);
                     break;
@@ -171,6 +198,8 @@ public class MainBasic extends AppCompatActivity {
         //Toolbar Backarrow Code Handling
         backImgbtn.setOnClickListener(v -> {
             navController.navigateUp();
+
+
         });
 
 
@@ -198,7 +227,8 @@ public class MainBasic extends AppCompatActivity {
                     NavOptions navOptions = new NavOptions.Builder()
                             .setPopUpTo(R.id.basic_nav, true)
                             .build();
-                    navController.navigate(itemId, null, navOptions);
+//                    navController.navigate(itemId, null, navOptions);
+                    navController.navigate(itemId);
 
                     // Close the drawer after item selection
                     drawerLayout.closeDrawer(GravityCompat.START);

@@ -1,63 +1,88 @@
 package com.example.mediworld;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ProductDetail#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.example.mediworld.databinding.FragmentProductDetailBinding;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
+
 public class ProductDetail extends Fragment {
+    private FragmentProductDetailBinding binding;
+    private DatabaseReference productRef;
+    private ValueEventListener valueEventListener;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public ProductDetail() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ProductDetail.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ProductDetail newInstance(String param1, String param2) {
-        ProductDetail fragment = new ProductDetail();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentProductDetailBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        Bundle args = getArguments();
+        if (args != null) {
+            String productId = args.getString("productId");
+            Log.d("productId",productId);
+
+            productRef = FirebaseDatabase.getInstance().getReference().child("MyShop").child("products").child(productId);
+            productRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    Log.d("dataSnapshot",dataSnapshot.toString());
+
+                    if (dataSnapshot.exists()) {
+                        String discount = dataSnapshot.child("discount").getValue(String.class);
+                        Log.d("discount",discount);
+
+
+                        int discountedPrice = dataSnapshot.child("discountedPrice").getValue(Integer.class);
+                        Log.d("discountedPrice", String.valueOf(discountedPrice));
+                        int Price = dataSnapshot.child("price").getValue(Integer.class);
+                        Log.d("Price", String.valueOf(Price));
+
+                        String imageUrl = dataSnapshot.child("imageUrl").getValue(String.class);
+                        Log.d("imageUrl",imageUrl);
+                        String name = dataSnapshot.child("name").getValue(String.class);
+
+                        // Set the product details to the views
+                        binding.productName.setText(name);
+                        binding.productPrice.setText(String.valueOf(Price));
+                        binding.discountedPrice.setText(String.valueOf(discountedPrice));
+                        binding.productDiscount.setText(discount);
+
+                        // Load the image using Picasso or any other image loading library
+                        Picasso.get().load(imageUrl).into(binding.productImg);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    // Handle database error
+                }
+            });
         }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_product_detail, container, false);
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+        if (productRef != null && valueEventListener != null) {
+            productRef.removeEventListener(valueEventListener); // Remove the event listener to avoid memory leaks
+        }
     }
 }

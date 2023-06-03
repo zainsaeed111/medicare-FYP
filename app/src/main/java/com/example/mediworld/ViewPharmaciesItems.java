@@ -123,12 +123,12 @@ public class ViewPharmaciesItems extends Fragment {
                 }
 
                 // Set up the adapters for the RecyclerViews
-                popularItemsAdapter = new PharmaciesMainItemAdapter(getContext(), popularItemsList);
+                popularItemsAdapter = new PharmaciesMainItemAdapter(requireContext(), popularItemsList,false);
                 popularItemsRecyclerView.setAdapter(popularItemsAdapter);
             /*    popularItemsRecyclerView.setAdapter(popularItemsAdapter);
                 latestItemsRecyclerView.setAdapter(latestItemsAdapter);*/
 
-                latestItemsAdapter = new PharmaciesMainItemAdapter(getContext(), latestItemsList);
+                latestItemsAdapter = new PharmaciesMainItemAdapter(requireContext(), latestItemsList,false);
                 latestItemsRecyclerView.setAdapter(latestItemsAdapter);
 
                 // Notify the adapters about the data change

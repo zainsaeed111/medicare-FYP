@@ -91,6 +91,27 @@ public class ShopHost extends AppCompatActivity {
                 case R.id.bnmyShop:
                     toolbarTitle.setText("My Shop");
                     break;
+                case R.id.viewMyProducts:
+                    toolbarTitle.setText("My Products");
+                    break;
+                case R.id.addProductFragment2:
+                    toolbarTitle.setText("Add Prdoucts");
+                    break;
+                case R.id.orderRequests:
+                    toolbarTitle.setText("Order Requests");
+                    break;
+                case R.id.orderHistory:
+                    toolbarTitle.setText("Order History");
+                    break;
+                case R.id.shopcontactUs:
+                    toolbarTitle.setText("Contact Us");
+                    break;
+                case R.id.shopAbout:
+                    toolbarTitle.setText("About");
+                    break;
+                case R.id.shopPrivacyPolicy:
+                    toolbarTitle.setText("Privacy Policiy");
+                    break;
                 // Add more cases for other destinations
 
                 default:

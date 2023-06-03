@@ -69,5 +69,24 @@ public class ShopHome extends Fragment {
                 navController.navigate(R.id.viewMyProducts);
             }
         });
+        binding.vieworderReqbox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavController navController = Navigation.findNavController(view);
+
+// Navigate to the destination fragment
+                navController.navigate(R.id.orderRequests);
+            }
+        });
+
+        binding.vieworderHistorybox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavController navController = Navigation.findNavController(view);
+
+// Navigate to the destination fragment
+                navController.navigate(R.id.orderHistory);
+            }
+        });
     }
 }

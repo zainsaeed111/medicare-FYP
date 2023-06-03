@@ -253,7 +253,7 @@
                     app:cardElevation="5dp">
 
                     <LinearLayout
-                        android:id="@+id/orderMedicinebox"
+                        android:id="@+id/vieworderReqbox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/white"
@@ -334,6 +334,7 @@
                     app:cardElevation="5dp">
 
                     <LinearLayout
+                        android:id="@+id/vieworderHistorybox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:forceDarkAllowed="false"

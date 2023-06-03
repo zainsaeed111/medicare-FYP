@@ -8,12 +8,12 @@
     android:background="@color/white"
     tools:context=".MainActivity">
 
-<pl.droidsonroids.gif.GifImageView
-    android:id="@+id/gif"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:src="@drawable/mediworld_logo"
-    android:layout_centerInParent="true"/>
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gif"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@drawable/mediworld_logo" />
 
 <TextView
 android:layout_width="wrap_content"

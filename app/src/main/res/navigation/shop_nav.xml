@@ -71,4 +71,14 @@
         android:name="com.example.mediworld.ViewMyProducts"
         android:label="fragment_view_my_products"
         tools:layout="@layout/fragment_view_my_products" />
+    <fragment
+        android:id="@+id/orderRequests"
+        android:name="com.example.mediworld.Shop.OrderRequests"
+        android:label="fragment_order_requests"
+        tools:layout="@layout/fragment_order_requests" />
+    <fragment
+        android:id="@+id/orderHistory"
+        android:name="com.example.mediworld.Shop.OrderHistory"
+        android:label="fragment_order_history"
+        tools:layout="@layout/fragment_order_history" />
 </navigation>

@@ -61,7 +61,7 @@ public class SeeAllProducts extends Fragment {
             int numColumns = 2; // You can change this value according to your needs
             allItemsRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), numColumns));
             // Set up the RecyclerView with the combined list
-            allItemsAdapter = new PharmaciesMainItemAdapter(getContext(), seeallItemsList);
+            allItemsAdapter = new PharmaciesMainItemAdapter(requireContext(), seeallItemsList, false);
             allItemsRecyclerView.setAdapter(allItemsAdapter);
         }
     }

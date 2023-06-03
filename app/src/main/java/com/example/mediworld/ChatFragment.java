@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.mediworld.Adapters.ChatAdapter;
 import com.example.mediworld.Models.ChatModel;
 import com.example.mediworld.databinding.FragmentChatBinding;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -35,6 +36,7 @@ public class ChatFragment extends Fragment {
 
     private String bPicture;
     private String adName;
+    private  BottomSheetDialog bottomSheetDialog;
 
     private String chatRoomId;
 
@@ -54,6 +56,35 @@ public class ChatFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         ((AppCompatActivity) requireActivity()).getSupportActionBar().hide();
         String value = retrieveValue(requireContext());
+        // Retrieve the extracted text from the arguments
+        String extractedText = getArguments().getString("extractedText");
+
+        // Set the extracted text in the EditText field
+        binding.etMessage.setText(extractedText);
+
+        bottomSheetDialog = new BottomSheetDialog(requireContext());
+        View bottomSheetView = getLayoutInflater().inflate(R.layout.upload_prescriptiob_bottom_sheet, null);
+        bottomSheetDialog.setContentView(bottomSheetView);
+
+// Set click listener for the button that opens the bottom sheet
+        binding.ivuploadImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Create an instance of the bottom sheet
+                UploadPrescriptionBottomSheet bottomSheet = new UploadPrescriptionBottomSheet();
+
+                // Pass the receiver's ID to the bottom sheet
+                bottomSheet.setReceiverId(receiverUid);
+
+                // Show the bottom sheet
+                bottomSheet.show(getParentFragmentManager(), bottomSheet.getTag());
+            }
+        });
+
+
+
+
+
 
         database = FirebaseDatabase.getInstance();
 
@@ -105,6 +136,7 @@ public class ChatFragment extends Fragment {
 
         list = new ArrayList<>();
 
+
         binding.sendMessage.setOnClickListener(view1 -> {
             if (binding.etMessage.getText().toString().isEmpty()) {
                 Toast.makeText(getContext(), "Please enter your ChatMessage", Toast.LENGTH_SHORT).show();
@@ -128,6 +160,7 @@ public class ChatFragment extends Fragment {
         getMessages();
     }
 
+/*
         private void getMessages() {
         database.getReference().child("chats").child(receiverUid).child(chatRoomId)
                 .child("messages").addValueEventListener(new ValueEventListener() {
@@ -158,8 +191,43 @@ public class ChatFragment extends Fragment {
                     }
                 });
     }
+*/
+private void getMessages() {
+    if (receiverUid != null && chatRoomId != null) {
+        database.getReference().child("chats").child(receiverUid).child(chatRoomId)
+                .child("messages").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot snapshot) {
+                        list.clear();
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                            ChatModel model = dataSnapshot.getValue(ChatModel.class);
+                            if (model != null) {
+                                list.add(model);
+                                Log.d("listdata", list.toString());
+                            }
+                        }
+                        Log.d("listsize", String.valueOf(list.size()));
+                        ChatAdapter chatAdapter = new ChatAdapter(list, getContext());
+                        chatAdapter.notifyDataSetChanged();
+                        binding.rvChat.setLayoutManager(new LinearLayoutManager(getContext()));
+                        binding.rvChat.setAdapter(chatAdapter);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                        Log.e("ChatFragment", error.getMessage());
+                    }
+                });
+    } else {
+        Log.e("ChatFragment", "receiverUid or chatRoomId is null");
+    }
+}
+
     private static String retrieveValue(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         return sharedPreferences.getString(KEY_VALUE, null);
+     /*   String extractedText = binding.textId.getText().toString();
+        String chatRoomId = getArguments().getString("chatRoomId");
+        openChatFragment(extractedText, chatRoomId);*/
     }
 }
